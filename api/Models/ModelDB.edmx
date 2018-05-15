@@ -1,0 +1,2830 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="InventoryControlModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BankName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IFSCCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="MICRCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="BranchAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="ContactNo" Type="nchar" MaxLength="10" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="District" Type="nvarchar" MaxLength="50" />
+          <Property Name="StateID" Type="bigint" />
+          <Property Name="CountryID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateID" Type="bigint" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="OrganizationTypeID" Type="bigint" />
+          <Property Name="BranchName" Type="nvarchar" MaxLength="50" />
+          <Property Name="IndustryType" Type="bigint" />
+          <Property Name="BusinessType" Type="bigint" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="PinCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="StateID" Type="bigint" />
+          <Property Name="CountryID" Type="bigint" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Website" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactPerson" Type="nvarchar" MaxLength="100" />
+          <Property Name="MfgLicenceNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="MfgLicenceExpDate" Type="date" />
+          <Property Name="DrugLicenceNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="DrugLicenceExpDate" Type="date" />
+          <Property Name="FoodLicenceNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="FoodLicenceExpDate" Type="date" />
+          <Property Name="GSTIN" Type="nvarchar" MaxLength="50" />
+          <Property Name="GSTINExpDate" Type="date" />
+          <Property Name="TAN" Type="nvarchar" MaxLength="50" />
+          <Property Name="TANExpDate" Type="date" />
+          <Property Name="PAN" Type="nvarchar" MaxLength="50" />
+          <Property Name="RegistrationType" Type="int" />
+          <Property Name="RegistrationNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="TaxStructureID" Type="int" />
+          <Property Name="FinancialYearID" Type="int" />
+          <Property Name="StockValuationTypeID" Type="int" />
+          <Property Name="Jurisdiction" Type="nvarchar" MaxLength="200" />
+          <Property Name="BaseCurrencyID" Type="bigint" />
+          <Property Name="ParentID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="CompanyBank">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="CompanyID" Type="bigint" />
+          <Property Name="BankID" Type="bigint" />
+          <Property Name="BankName" Type="nchar" MaxLength="10" />
+          <Property Name="IFSCCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="MICRCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="BranchAddress" Type="nvarchar(max)" />
+          <Property Name="ContactNo" Type="nchar" MaxLength="10" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="District" Type="nvarchar" MaxLength="50" />
+          <Property Name="StateID" Type="bigint" />
+          <Property Name="CountryID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="CompanyLocation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="bigint" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" />
+          <Property Name="IsVertual" Type="bit" />
+          <Property Name="VertualLocationID" Type="int" />
+          <Property Name="LocationTypeID" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="City" Type="nchar" MaxLength="10" />
+          <Property Name="StateID" Type="bigint" />
+          <Property Name="CountryID" Type="bigint" />
+          <Property Name="AreaUnitID" Type="bigint" />
+          <Property Name="Height" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="Width" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="Length" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="CompanyTerms">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="bigint" Nullable="false" />
+          <Property Name="TermType" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="ISActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DocumentsDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="DocumentID" Type="bigint" />
+          <Property Name="FinancialYearID" Type="bigint" />
+          <Property Name="MonthNo" Type="nvarchar" MaxLength="10" />
+          <Property Name="StartNo" Type="int" />
+          <Property Name="CurrentNo" Type="int" />
+        </EntityType>
+        <EntityType Name="DocumentsList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DocName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TransactionType" Type="bigint" Nullable="false" />
+          <Property Name="EffectPlusMinus" Type="int" />
+          <Property Name="Separator" Type="nvarchar" MaxLength="1" />
+          <Property Name="ISMonthly" Type="bit" />
+          <Property Name="MonthFormat" Type="nvarchar" MaxLength="10" />
+          <Property Name="YearFormat" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="FinancialYear">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="bigint" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FromDate" Type="date" Nullable="false" />
+          <Property Name="ToDate" Type="date" Nullable="false" />
+          <Property Name="IsCurrentYear" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="bigint" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ParentGroupID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="ItemHSN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HSNCode" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" />
+          <Property Name="CGST" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SGST" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="IGST" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="EffectiveFrom" Type="date" />
+          <Property Name="AmendmentNo" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ParentID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="ItemImages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="ItemID" Type="bigint" />
+          <Property Name="ImageType" Type="int" />
+          <Property Name="ImagePath" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="ItemMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="bigint" Nullable="false" />
+          <Property Name="ItemGroupID" Type="bigint" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="BrandName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ModelNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Manufacturer" Type="nvarchar" MaxLength="200" />
+          <Property Name="Specification" Type="nvarchar(max)" />
+          <Property Name="IsExpired" Type="smallint" />
+          <Property Name="ItemHSN" Type="bigint" />
+          <Property Name="PurchaseUnitID" Type="bigint" />
+          <Property Name="StockUnitID" Type="bigint" />
+          <Property Name="ProductionUnitID" Type="bigint" />
+          <Property Name="SalesUnitID" Type="bigint" />
+          <Property Name="Price" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="MinOrderQty" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="MaxStockLevel" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="MinStockLevel" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="SafetyStockLevel" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="MinLotSize" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="MaxLotSize" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="DimensionUnitID" Type="bigint" />
+          <Property Name="Length" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="Width" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="Height" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="WeightUnitID" Type="bigint" />
+          <Property Name="Weight" Type="numeric" Precision="18" Scale="3" />
+        </EntityType>
+        <EntityType Name="ItemStock">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemID" Type="bigint" />
+          <Property Name="OpeningStock" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="ReeceivedStock" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="IssuedStock" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="ClosingStock" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="FinancialYearID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="ItemStockDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemID" Type="bigint" Nullable="false" />
+          <Property Name="FinancialYearID" Type="bigint" />
+          <Property Name="DocumentID" Type="bigint" />
+          <Property Name="TransactionID" Type="bigint" />
+          <Property Name="TransactionDate" Type="datetime" />
+          <Property Name="LocationID" Type="bigint" />
+          <Property Name="OpeningStock" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="TransactionQty" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="ClosingStock" Type="numeric" Precision="18" Scale="3" />
+        </EntityType>
+        <EntityType Name="LookupData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="bigint" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ParentID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="CompanyID" Type="bigint" />
+          <Property Name="ModuleID" Type="int" />
+          <Property Name="MenuType" Type="smallint" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" />
+          <Property Name="DefaultURL" Type="nvarchar" MaxLength="255" />
+          <Property Name="Action" Type="nvarchar" MaxLength="500" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="255" />
+          <Property Name="Tooltips" Type="nvarchar" MaxLength="200" />
+          <Property Name="DisplayOrder" Type="int" />
+          <Property Name="ParentID" Type="bigint" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Party">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="bigint" Nullable="false" />
+          <Property Name="PartyType" Type="bigint" Nullable="false" />
+          <Property Name="FirmType" Type="bigint" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Website" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="bigint" />
+          <Property Name="Country" Type="bigint" />
+          <Property Name="PinCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="RegistrationType" Type="smallint" />
+          <Property Name="GSTIN" Type="nvarchar" MaxLength="50" />
+          <Property Name="GSTINExpDate" Type="date" />
+          <Property Name="TAN" Type="nvarchar" MaxLength="50" />
+          <Property Name="TANExpDate" Type="date" />
+          <Property Name="PAN" Type="nvarchar" MaxLength="50" />
+          <Property Name="PANExpDate" Type="date" />
+          <Property Name="RegistrationNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="RegistrationExpDate" Type="date" />
+          <Property Name="MfgLicenceNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="MfgLicenceExpDate" Type="date" />
+          <Property Name="DrugLicenceNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="DrugLicenceExpDate" Type="nchar" MaxLength="10" />
+          <Property Name="FoodLicenceNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="FoodLicenceExpDate" Type="date" />
+          <Property Name="CRDR" Type="smallint" />
+          <Property Name="OpeningBalance" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ClosingBalance" Type="numeric" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="PartyAddress">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="PartyID" Type="bigint" Nullable="false" />
+          <Property Name="AddressType" Type="bigint" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="CountryID" Type="bigint" />
+          <Property Name="StateID" Type="bigint" />
+          <Property Name="CityID" Type="bigint" />
+          <Property Name="PinCode" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="PartyContacts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartyID" Type="bigint" Nullable="false" />
+          <Property Name="PersonName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Designation" Type="bigint" />
+          <Property Name="Department" Type="bigint" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PartyLedger">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartyID" Type="bigint" />
+          <Property Name="OPCRDR" Type="smallint" />
+          <Property Name="OpeningBalance" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CreditAmount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="DebitAmount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CLCRDR" Type="smallint" />
+          <Property Name="ClosingBalance" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="FinancialYearID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="PartyLedgerDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartyID" Type="bigint" Nullable="false" />
+          <Property Name="FinancialYearID" Type="bigint" />
+          <Property Name="DocumentID" Type="bigint" />
+          <Property Name="TransactionID" Type="bigint" />
+          <Property Name="TransactionDate" Type="datetime" />
+          <Property Name="CRDB" Type="smallint" />
+          <Property Name="OpeningBalance" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CreditAmount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="DebitAmount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ClosingBalance" Type="numeric" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="PartyVehicle">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartyID" Type="bigint" Nullable="false" />
+          <Property Name="VehicleNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="VehicleModel" Type="nvarchar" MaxLength="50" />
+          <Property Name="VehicleManufacturer" Type="bigint" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaymentReceiptDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="bigint" Nullable="false" />
+          <Property Name="DocumentID" Type="bigint" Nullable="false" />
+          <Property Name="PaymentReceiptMasterID" Type="bigint" />
+          <Property Name="TransactionMasterID" Type="bigint" />
+          <Property Name="TransactionNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="TransactionDate" Type="datetime" />
+          <Property Name="PayModeID" Type="bigint" />
+          <Property Name="PayAmount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CompanyBankID" Type="bigint" />
+          <Property Name="PartyBankName" Type="bigint" />
+          <Property Name="PartyBankBranch" Type="nvarchar" MaxLength="100" />
+          <Property Name="PartyBankIFSC" Type="nvarchar" MaxLength="20" />
+          <Property Name="PartyBankMICR" Type="nvarchar" MaxLength="20" />
+          <Property Name="InstrumentNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="PartyBankAccountType" Type="bigint" />
+          <Property Name="InstrumentDate" Type="date" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="PaymentReceiptMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="CompanyID" Type="bigint" Nullable="false" />
+          <Property Name="DocumentID" Type="bigint" Nullable="false" />
+          <Property Name="TransactionMasterID" Type="bigint" />
+          <Property Name="TransactionNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="TransactionDate" Type="datetime" />
+          <Property Name="PartyID" Type="bigint" />
+          <Property Name="BillAmount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="PayAmount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="DueAmount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryID" Type="bigint" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="bigint" />
+          <Property Name="Code" Type="nvarchar" MaxLength="10" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="QuantityType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UnitConversion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="FromUnitID" Type="bigint" />
+          <Property Name="FromValue" Type="int" />
+          <Property Name="ToUnitID" Type="bigint" />
+          <Property Name="ToValue" Type="int" />
+          <Property Name="Ratio" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_Bank_Bank">
+          <End Role="Bank" Type="Self.Bank" Multiplicity="1" />
+          <End Role="Bank1" Type="Self.Bank" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Bank1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bank_State">
+          <End Role="State" Type="Self.State" Multiplicity="0..1" />
+          <End Role="Bank" Type="Self.Bank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Bank">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_City_State">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyTerms_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="CompanyTerms" Type="Self.CompanyTerms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CompanyTerms">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentsDetail_DocumentsList">
+          <End Role="DocumentsList" Type="Self.DocumentsList" Multiplicity="0..1" />
+          <End Role="DocumentsDetail" Type="Self.DocumentsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DocumentsDetail">
+              <PropertyRef Name="DocumentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentsDetail_FinancialYear">
+          <End Role="FinancialYear" Type="Self.FinancialYear" Multiplicity="0..1" />
+          <End Role="DocumentsDetail" Type="Self.DocumentsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinancialYear">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DocumentsDetail">
+              <PropertyRef Name="FinancialYearID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinancialYear_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="FinancialYear" Type="Self.FinancialYear" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FinancialYear">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemGroup_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="ItemGroup" Type="Self.ItemGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemGroup">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemGroup_ItemGroup">
+          <End Role="ItemGroup" Type="Self.ItemGroup" Multiplicity="0..1" />
+          <End Role="ItemGroup1" Type="Self.ItemGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemGroup1">
+              <PropertyRef Name="ParentGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemMaster_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemMaster">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemMaster_ItemGroup">
+          <End Role="ItemGroup" Type="Self.ItemGroup" Multiplicity="1" />
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemMaster">
+              <PropertyRef Name="ItemGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemMaster_ItemHSN">
+          <End Role="ItemHSN" Type="Self.ItemHSN" Multiplicity="0..1" />
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemHSN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemMaster">
+              <PropertyRef Name="ItemHSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemMaster_Unit">
+          <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemMaster">
+              <PropertyRef Name="PurchaseUnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemMaster_Unit1">
+          <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemMaster">
+              <PropertyRef Name="StockUnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemMaster_Unit2">
+          <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemMaster">
+              <PropertyRef Name="SalesUnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemStock_FinancialYear">
+          <End Role="FinancialYear" Type="Self.FinancialYear" Multiplicity="0..1" />
+          <End Role="ItemStock" Type="Self.ItemStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinancialYear">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemStock">
+              <PropertyRef Name="FinancialYearID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemStock_ItemMaster">
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="0..1" />
+          <End Role="ItemStock" Type="Self.ItemStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemStock">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemStockDetail_DocumentsList">
+          <End Role="DocumentsList" Type="Self.DocumentsList" Multiplicity="0..1" />
+          <End Role="ItemStockDetail" Type="Self.ItemStockDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemStockDetail">
+              <PropertyRef Name="DocumentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemStockDetail_FinancialYear">
+          <End Role="FinancialYear" Type="Self.FinancialYear" Multiplicity="0..1" />
+          <End Role="ItemStockDetail" Type="Self.ItemStockDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinancialYear">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemStockDetail">
+              <PropertyRef Name="FinancialYearID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemStockDetail_ItemMaster">
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="1" />
+          <End Role="ItemStockDetail" Type="Self.ItemStockDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemStockDetail">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LookupData_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="LookupData" Type="Self.LookupData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LookupData">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LookupData_LookupData">
+          <End Role="LookupData" Type="Self.LookupData" Multiplicity="0..1" />
+          <End Role="LookupData1" Type="Self.LookupData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupData">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LookupData1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Party_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Party" Type="Self.Party" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Party">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartyAddress_Party">
+          <End Role="Party" Type="Self.Party" Multiplicity="1" />
+          <End Role="PartyAddress" Type="Self.PartyAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Party">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PartyAddress">
+              <PropertyRef Name="PartyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartyContacts_Party">
+          <End Role="Party" Type="Self.Party" Multiplicity="1" />
+          <End Role="PartyContacts" Type="Self.PartyContacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Party">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PartyContacts">
+              <PropertyRef Name="PartyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartyLedger_Party">
+          <End Role="Party" Type="Self.Party" Multiplicity="0..1" />
+          <End Role="PartyLedger" Type="Self.PartyLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Party">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PartyLedger">
+              <PropertyRef Name="PartyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartyLedgerDetail_Party">
+          <End Role="Party" Type="Self.Party" Multiplicity="1" />
+          <End Role="PartyLedgerDetail" Type="Self.PartyLedgerDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Party">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PartyLedgerDetail">
+              <PropertyRef Name="PartyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartyVehicle_Party">
+          <End Role="Party" Type="Self.Party" Multiplicity="1" />
+          <End Role="PartyVehicle" Type="Self.PartyVehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Party">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PartyVehicle">
+              <PropertyRef Name="PartyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentReceiptDetail_Bank">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="PaymentReceiptDetail" Type="Self.PaymentReceiptDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PaymentReceiptDetail">
+              <PropertyRef Name="CompanyBankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentReceiptDetail_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="PaymentReceiptDetail" Type="Self.PaymentReceiptDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PaymentReceiptDetail">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentReceiptDetail_PaymentReceiptMaster">
+          <End Role="PaymentReceiptMaster" Type="Self.PaymentReceiptMaster" Multiplicity="0..1" />
+          <End Role="PaymentReceiptDetail" Type="Self.PaymentReceiptDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentReceiptMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PaymentReceiptDetail">
+              <PropertyRef Name="PaymentReceiptMasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentReceiptMaster_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="PaymentReceiptMaster" Type="Self.PaymentReceiptMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PaymentReceiptMaster">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentReceiptMaster_DocumentsList">
+          <End Role="DocumentsList" Type="Self.DocumentsList" Multiplicity="1" />
+          <End Role="PaymentReceiptMaster" Type="Self.PaymentReceiptMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PaymentReceiptMaster">
+              <PropertyRef Name="DocumentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentReceiptMaster_Party">
+          <End Role="Party" Type="Self.Party" Multiplicity="0..1" />
+          <End Role="PaymentReceiptMaster" Type="Self.PaymentReceiptMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Party">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PaymentReceiptMaster">
+              <PropertyRef Name="PartyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_State_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="State" Type="Self.State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="State">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Unit_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Unit" Type="Self.Unit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Unit">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UnitConversion_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="UnitConversion" Type="Self.UnitConversion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UnitConversion">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UnitConversion_Unit">
+          <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="UnitConversion" Type="Self.UnitConversion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UnitConversion">
+              <PropertyRef Name="FromUnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UnitConversion_Unit1">
+          <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="UnitConversion" Type="Self.UnitConversion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UnitConversion">
+              <PropertyRef Name="ToUnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InventoryControlModelStoreContainer">
+          <EntitySet Name="Bank" EntityType="Self.Bank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyBank" EntityType="Self.CompanyBank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyLocation" EntityType="Self.CompanyLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyTerms" EntityType="Self.CompanyTerms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentsDetail" EntityType="Self.DocumentsDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentsList" EntityType="Self.DocumentsList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FinancialYear" EntityType="Self.FinancialYear" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemGroup" EntityType="Self.ItemGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemHSN" EntityType="Self.ItemHSN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemImages" EntityType="Self.ItemImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemMaster" EntityType="Self.ItemMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemStock" EntityType="Self.ItemStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemStockDetail" EntityType="Self.ItemStockDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LookupData" EntityType="Self.LookupData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Party" EntityType="Self.Party" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartyAddress" EntityType="Self.PartyAddress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartyContacts" EntityType="Self.PartyContacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartyLedger" EntityType="Self.PartyLedger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartyLedgerDetail" EntityType="Self.PartyLedgerDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartyVehicle" EntityType="Self.PartyVehicle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentReceiptDetail" EntityType="Self.PaymentReceiptDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentReceiptMaster" EntityType="Self.PaymentReceiptMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnitConversion" EntityType="Self.UnitConversion" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Bank_Bank" Association="Self.FK_Bank_Bank">
+            <End Role="Bank" EntitySet="Bank" />
+            <End Role="Bank1" EntitySet="Bank" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bank_State" Association="Self.FK_Bank_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="Bank" EntitySet="Bank" />
+          </AssociationSet>
+          <AssociationSet Name="FK_City_State" Association="Self.FK_City_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyTerms_Company" Association="Self.FK_CompanyTerms_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyTerms" EntitySet="CompanyTerms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentsDetail_DocumentsList" Association="Self.FK_DocumentsDetail_DocumentsList">
+            <End Role="DocumentsList" EntitySet="DocumentsList" />
+            <End Role="DocumentsDetail" EntitySet="DocumentsDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentsDetail_FinancialYear" Association="Self.FK_DocumentsDetail_FinancialYear">
+            <End Role="FinancialYear" EntitySet="FinancialYear" />
+            <End Role="DocumentsDetail" EntitySet="DocumentsDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinancialYear_Company" Association="Self.FK_FinancialYear_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="FinancialYear" EntitySet="FinancialYear" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemGroup_Company" Association="Self.FK_ItemGroup_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="ItemGroup" EntitySet="ItemGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemGroup_ItemGroup" Association="Self.FK_ItemGroup_ItemGroup">
+            <End Role="ItemGroup" EntitySet="ItemGroup" />
+            <End Role="ItemGroup1" EntitySet="ItemGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMaster_Company" Association="Self.FK_ItemMaster_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMaster_ItemGroup" Association="Self.FK_ItemMaster_ItemGroup">
+            <End Role="ItemGroup" EntitySet="ItemGroup" />
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMaster_ItemHSN" Association="Self.FK_ItemMaster_ItemHSN">
+            <End Role="ItemHSN" EntitySet="ItemHSN" />
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMaster_Unit" Association="Self.FK_ItemMaster_Unit">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMaster_Unit1" Association="Self.FK_ItemMaster_Unit1">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMaster_Unit2" Association="Self.FK_ItemMaster_Unit2">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemStock_FinancialYear" Association="Self.FK_ItemStock_FinancialYear">
+            <End Role="FinancialYear" EntitySet="FinancialYear" />
+            <End Role="ItemStock" EntitySet="ItemStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemStock_ItemMaster" Association="Self.FK_ItemStock_ItemMaster">
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
+            <End Role="ItemStock" EntitySet="ItemStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemStockDetail_DocumentsList" Association="Self.FK_ItemStockDetail_DocumentsList">
+            <End Role="DocumentsList" EntitySet="DocumentsList" />
+            <End Role="ItemStockDetail" EntitySet="ItemStockDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemStockDetail_FinancialYear" Association="Self.FK_ItemStockDetail_FinancialYear">
+            <End Role="FinancialYear" EntitySet="FinancialYear" />
+            <End Role="ItemStockDetail" EntitySet="ItemStockDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemStockDetail_ItemMaster" Association="Self.FK_ItemStockDetail_ItemMaster">
+            <End Role="ItemMaster" EntitySet="ItemMaster" />
+            <End Role="ItemStockDetail" EntitySet="ItemStockDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LookupData_Company" Association="Self.FK_LookupData_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="LookupData" EntitySet="LookupData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LookupData_LookupData" Association="Self.FK_LookupData_LookupData">
+            <End Role="LookupData" EntitySet="LookupData" />
+            <End Role="LookupData1" EntitySet="LookupData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Party_Company" Association="Self.FK_Party_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Party" EntitySet="Party" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartyAddress_Party" Association="Self.FK_PartyAddress_Party">
+            <End Role="Party" EntitySet="Party" />
+            <End Role="PartyAddress" EntitySet="PartyAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartyContacts_Party" Association="Self.FK_PartyContacts_Party">
+            <End Role="Party" EntitySet="Party" />
+            <End Role="PartyContacts" EntitySet="PartyContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartyLedger_Party" Association="Self.FK_PartyLedger_Party">
+            <End Role="Party" EntitySet="Party" />
+            <End Role="PartyLedger" EntitySet="PartyLedger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartyLedgerDetail_Party" Association="Self.FK_PartyLedgerDetail_Party">
+            <End Role="Party" EntitySet="Party" />
+            <End Role="PartyLedgerDetail" EntitySet="PartyLedgerDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartyVehicle_Party" Association="Self.FK_PartyVehicle_Party">
+            <End Role="Party" EntitySet="Party" />
+            <End Role="PartyVehicle" EntitySet="PartyVehicle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentReceiptDetail_Bank" Association="Self.FK_PaymentReceiptDetail_Bank">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="PaymentReceiptDetail" EntitySet="PaymentReceiptDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentReceiptDetail_Company" Association="Self.FK_PaymentReceiptDetail_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="PaymentReceiptDetail" EntitySet="PaymentReceiptDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentReceiptDetail_PaymentReceiptMaster" Association="Self.FK_PaymentReceiptDetail_PaymentReceiptMaster">
+            <End Role="PaymentReceiptMaster" EntitySet="PaymentReceiptMaster" />
+            <End Role="PaymentReceiptDetail" EntitySet="PaymentReceiptDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentReceiptMaster_Company" Association="Self.FK_PaymentReceiptMaster_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="PaymentReceiptMaster" EntitySet="PaymentReceiptMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentReceiptMaster_DocumentsList" Association="Self.FK_PaymentReceiptMaster_DocumentsList">
+            <End Role="DocumentsList" EntitySet="DocumentsList" />
+            <End Role="PaymentReceiptMaster" EntitySet="PaymentReceiptMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentReceiptMaster_Party" Association="Self.FK_PaymentReceiptMaster_Party">
+            <End Role="Party" EntitySet="Party" />
+            <End Role="PaymentReceiptMaster" EntitySet="PaymentReceiptMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_State_Country" Association="Self.FK_State_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="State" EntitySet="State" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Unit_Company" Association="Self.FK_Unit_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Unit" EntitySet="Unit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UnitConversion_Company" Association="Self.FK_UnitConversion_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="UnitConversion" EntitySet="UnitConversion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UnitConversion_Unit" Association="Self.FK_UnitConversion_Unit">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="UnitConversion" EntitySet="UnitConversion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UnitConversion_Unit1" Association="Self.FK_UnitConversion_Unit1">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="UnitConversion" EntitySet="UnitConversion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InventoryControlModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BankName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IFSCCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MICRCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BranchAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StateID" Type="Int64" />
+          <Property Name="CountryID" Type="Int64" />
+          <NavigationProperty Name="Bank1" Relationship="Self.FK_Bank_Bank" FromRole="Bank" ToRole="Bank1" />
+          <NavigationProperty Name="Bank2" Relationship="Self.FK_Bank_Bank" FromRole="Bank1" ToRole="Bank" />
+          <NavigationProperty Name="State" Relationship="Self.FK_Bank_State" FromRole="Bank" ToRole="State" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateID" Type="Int64" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="State" Relationship="Self.FK_City_State" FromRole="City" ToRole="State" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OrganizationTypeID" Type="Int64" />
+          <Property Name="BranchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IndustryType" Type="Int64" />
+          <Property Name="BusinessType" Type="Int64" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PinCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="StateID" Type="Int64" />
+          <Property Name="CountryID" Type="Int64" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPerson" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MfgLicenceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MfgLicenceExpDate" Type="DateTime" Precision="0" />
+          <Property Name="DrugLicenceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DrugLicenceExpDate" Type="DateTime" Precision="0" />
+          <Property Name="FoodLicenceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FoodLicenceExpDate" Type="DateTime" Precision="0" />
+          <Property Name="GSTIN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GSTINExpDate" Type="DateTime" Precision="0" />
+          <Property Name="TAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TANExpDate" Type="DateTime" Precision="0" />
+          <Property Name="PAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegistrationType" Type="Int32" />
+          <Property Name="RegistrationNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaxStructureID" Type="Int32" />
+          <Property Name="FinancialYearID" Type="Int32" />
+          <Property Name="StockValuationTypeID" Type="Int32" />
+          <Property Name="Jurisdiction" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BaseCurrencyID" Type="Int64" />
+          <Property Name="ParentID" Type="Int64" />
+          <NavigationProperty Name="CompanyTerms" Relationship="Self.FK_CompanyTerms_Company" FromRole="Company" ToRole="CompanyTerms" />
+          <NavigationProperty Name="FinancialYears" Relationship="Self.FK_FinancialYear_Company" FromRole="Company" ToRole="FinancialYear" />
+          <NavigationProperty Name="ItemGroups" Relationship="Self.FK_ItemGroup_Company" FromRole="Company" ToRole="ItemGroup" />
+          <NavigationProperty Name="ItemMasters" Relationship="Self.FK_ItemMaster_Company" FromRole="Company" ToRole="ItemMaster" />
+          <NavigationProperty Name="LookupDatas" Relationship="Self.FK_LookupData_Company" FromRole="Company" ToRole="LookupData" />
+          <NavigationProperty Name="Parties" Relationship="Self.FK_Party_Company" FromRole="Company" ToRole="Party" />
+          <NavigationProperty Name="PaymentReceiptDetails" Relationship="Self.FK_PaymentReceiptDetail_Bank" FromRole="Company" ToRole="PaymentReceiptDetail" />
+          <NavigationProperty Name="PaymentReceiptDetails1" Relationship="Self.FK_PaymentReceiptDetail_Company" FromRole="Company" ToRole="PaymentReceiptDetail" />
+          <NavigationProperty Name="PaymentReceiptMasters" Relationship="Self.FK_PaymentReceiptMaster_Company" FromRole="Company" ToRole="PaymentReceiptMaster" />
+          <NavigationProperty Name="Units" Relationship="Self.FK_Unit_Company" FromRole="Company" ToRole="Unit" />
+          <NavigationProperty Name="UnitConversions" Relationship="Self.FK_UnitConversion_Company" FromRole="Company" ToRole="UnitConversion" />
+        </EntityType>
+        <EntityType Name="CompanyBank">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="CompanyID" Type="Int64" />
+          <Property Name="BankID" Type="Int64" />
+          <Property Name="BankName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IFSCCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MICRCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BranchAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StateID" Type="Int64" />
+          <Property Name="CountryID" Type="Int64" />
+        </EntityType>
+        <EntityType Name="CompanyLocation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int64" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IsVertual" Type="Boolean" />
+          <Property Name="VertualLocationID" Type="Int32" />
+          <Property Name="LocationTypeID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="StateID" Type="Int64" />
+          <Property Name="CountryID" Type="Int64" />
+          <Property Name="AreaUnitID" Type="Int64" />
+          <Property Name="Height" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="Width" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="Length" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CompanyTerm">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int64" Nullable="false" />
+          <Property Name="TermType" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="ISActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_CompanyTerms_Company" FromRole="CompanyTerms" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="States" Relationship="Self.FK_State_Country" FromRole="Country" ToRole="State" />
+        </EntityType>
+        <EntityType Name="DocumentsDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="DocumentID" Type="Int64" />
+          <Property Name="FinancialYearID" Type="Int64" />
+          <Property Name="MonthNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="StartNo" Type="Int32" />
+          <Property Name="CurrentNo" Type="Int32" />
+          <NavigationProperty Name="DocumentsList" Relationship="Self.FK_DocumentsDetail_DocumentsList" FromRole="DocumentsDetail" ToRole="DocumentsList" />
+          <NavigationProperty Name="FinancialYear" Relationship="Self.FK_DocumentsDetail_FinancialYear" FromRole="DocumentsDetail" ToRole="FinancialYear" />
+        </EntityType>
+        <EntityType Name="DocumentsList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DocName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TransactionType" Type="Int64" Nullable="false" />
+          <Property Name="EffectPlusMinus" Type="Int32" />
+          <Property Name="Separator" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="ISMonthly" Type="Boolean" />
+          <Property Name="MonthFormat" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="YearFormat" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DocumentsDetails" Relationship="Self.FK_DocumentsDetail_DocumentsList" FromRole="DocumentsList" ToRole="DocumentsDetail" />
+          <NavigationProperty Name="ItemStockDetails" Relationship="Self.FK_ItemStockDetail_DocumentsList" FromRole="DocumentsList" ToRole="ItemStockDetail" />
+          <NavigationProperty Name="PaymentReceiptMasters" Relationship="Self.FK_PaymentReceiptMaster_DocumentsList" FromRole="DocumentsList" ToRole="PaymentReceiptMaster" />
+        </EntityType>
+        <EntityType Name="FinancialYear">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int64" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsCurrentYear" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_FinancialYear_Company" FromRole="FinancialYear" ToRole="Company" />
+          <NavigationProperty Name="DocumentsDetails" Relationship="Self.FK_DocumentsDetail_FinancialYear" FromRole="FinancialYear" ToRole="DocumentsDetail" />
+          <NavigationProperty Name="ItemStocks" Relationship="Self.FK_ItemStock_FinancialYear" FromRole="FinancialYear" ToRole="ItemStock" />
+          <NavigationProperty Name="ItemStockDetails" Relationship="Self.FK_ItemStockDetail_FinancialYear" FromRole="FinancialYear" ToRole="ItemStockDetail" />
+        </EntityType>
+        <EntityType Name="ItemGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int64" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParentGroupID" Type="Int64" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_ItemGroup_Company" FromRole="ItemGroup" ToRole="Company" />
+          <NavigationProperty Name="ItemGroup1" Relationship="Self.FK_ItemGroup_ItemGroup" FromRole="ItemGroup" ToRole="ItemGroup1" />
+          <NavigationProperty Name="ItemGroup2" Relationship="Self.FK_ItemGroup_ItemGroup" FromRole="ItemGroup1" ToRole="ItemGroup" />
+          <NavigationProperty Name="ItemMasters" Relationship="Self.FK_ItemMaster_ItemGroup" FromRole="ItemGroup" ToRole="ItemMaster" />
+        </EntityType>
+        <EntityType Name="ItemHSN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HSNCode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CGST" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SGST" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IGST" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="EffectiveFrom" Type="DateTime" Precision="0" />
+          <Property Name="AmendmentNo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ParentID" Type="Int64" />
+          <NavigationProperty Name="ItemMasters" Relationship="Self.FK_ItemMaster_ItemHSN" FromRole="ItemHSN" ToRole="ItemMaster" />
+        </EntityType>
+        <EntityType Name="ItemImage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="ItemID" Type="Int64" />
+          <Property Name="ImageType" Type="Int32" />
+          <Property Name="ImagePath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ItemMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int64" Nullable="false" />
+          <Property Name="ItemGroupID" Type="Int64" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BrandName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ModelNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Manufacturer" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Specification" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsExpired" Type="Int16" />
+          <Property Name="ItemHSN" Type="Int64" />
+          <Property Name="PurchaseUnitID" Type="Int64" />
+          <Property Name="StockUnitID" Type="Int64" />
+          <Property Name="ProductionUnitID" Type="Int64" />
+          <Property Name="SalesUnitID" Type="Int64" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MinOrderQty" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="MaxStockLevel" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="MinStockLevel" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="SafetyStockLevel" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="MinLotSize" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="MaxLotSize" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="DimensionUnitID" Type="Int64" />
+          <Property Name="Length" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="Width" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="Height" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="WeightUnitID" Type="Int64" />
+          <Property Name="Weight" Type="Decimal" Precision="18" Scale="3" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_ItemMaster_Company" FromRole="ItemMaster" ToRole="Company" />
+          <NavigationProperty Name="ItemGroup" Relationship="Self.FK_ItemMaster_ItemGroup" FromRole="ItemMaster" ToRole="ItemGroup" />
+          <NavigationProperty Name="ItemHSN1" Relationship="Self.FK_ItemMaster_ItemHSN" FromRole="ItemMaster" ToRole="ItemHSN" />
+          <NavigationProperty Name="Unit" Relationship="Self.FK_ItemMaster_Unit" FromRole="ItemMaster" ToRole="Unit" />
+          <NavigationProperty Name="Unit1" Relationship="Self.FK_ItemMaster_Unit1" FromRole="ItemMaster" ToRole="Unit" />
+          <NavigationProperty Name="Unit2" Relationship="Self.FK_ItemMaster_Unit2" FromRole="ItemMaster" ToRole="Unit" />
+          <NavigationProperty Name="ItemStocks" Relationship="Self.FK_ItemStock_ItemMaster" FromRole="ItemMaster" ToRole="ItemStock" />
+          <NavigationProperty Name="ItemStockDetails" Relationship="Self.FK_ItemStockDetail_ItemMaster" FromRole="ItemMaster" ToRole="ItemStockDetail" />
+        </EntityType>
+        <EntityType Name="ItemStock">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemID" Type="Int64" />
+          <Property Name="OpeningStock" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="ReeceivedStock" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="IssuedStock" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="ClosingStock" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="FinancialYearID" Type="Int64" />
+          <NavigationProperty Name="FinancialYear" Relationship="Self.FK_ItemStock_FinancialYear" FromRole="ItemStock" ToRole="FinancialYear" />
+          <NavigationProperty Name="ItemMaster" Relationship="Self.FK_ItemStock_ItemMaster" FromRole="ItemStock" ToRole="ItemMaster" />
+        </EntityType>
+        <EntityType Name="ItemStockDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemID" Type="Int64" Nullable="false" />
+          <Property Name="FinancialYearID" Type="Int64" />
+          <Property Name="DocumentID" Type="Int64" />
+          <Property Name="TransactionID" Type="Int64" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
+          <Property Name="LocationID" Type="Int64" />
+          <Property Name="OpeningStock" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="TransactionQty" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="ClosingStock" Type="Decimal" Precision="18" Scale="3" />
+          <NavigationProperty Name="DocumentsList" Relationship="Self.FK_ItemStockDetail_DocumentsList" FromRole="ItemStockDetail" ToRole="DocumentsList" />
+          <NavigationProperty Name="FinancialYear" Relationship="Self.FK_ItemStockDetail_FinancialYear" FromRole="ItemStockDetail" ToRole="FinancialYear" />
+          <NavigationProperty Name="ItemMaster" Relationship="Self.FK_ItemStockDetail_ItemMaster" FromRole="ItemStockDetail" ToRole="ItemMaster" />
+        </EntityType>
+        <EntityType Name="LookupData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int64" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParentID" Type="Int64" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_LookupData_Company" FromRole="LookupData" ToRole="Company" />
+          <NavigationProperty Name="LookupData1" Relationship="Self.FK_LookupData_LookupData" FromRole="LookupData" ToRole="LookupData1" />
+          <NavigationProperty Name="LookupData2" Relationship="Self.FK_LookupData_LookupData" FromRole="LookupData1" ToRole="LookupData" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="CompanyID" Type="Int64" />
+          <Property Name="ModuleID" Type="Int32" />
+          <Property Name="MenuType" Type="Int16" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DefaultURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Action" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Tooltips" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <Property Name="ParentID" Type="Int64" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Party">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int64" Nullable="false" />
+          <Property Name="PartyType" Type="Int64" Nullable="false" />
+          <Property Name="FirmType" Type="Int64" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Int64" />
+          <Property Name="Country" Type="Int64" />
+          <Property Name="PinCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="RegistrationType" Type="Int16" />
+          <Property Name="GSTIN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GSTINExpDate" Type="DateTime" Precision="0" />
+          <Property Name="TAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TANExpDate" Type="DateTime" Precision="0" />
+          <Property Name="PAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PANExpDate" Type="DateTime" Precision="0" />
+          <Property Name="RegistrationNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegistrationExpDate" Type="DateTime" Precision="0" />
+          <Property Name="MfgLicenceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MfgLicenceExpDate" Type="DateTime" Precision="0" />
+          <Property Name="DrugLicenceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DrugLicenceExpDate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="FoodLicenceNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FoodLicenceExpDate" Type="DateTime" Precision="0" />
+          <Property Name="CRDR" Type="Int16" />
+          <Property Name="OpeningBalance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ClosingBalance" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Party_Company" FromRole="Party" ToRole="Company" />
+          <NavigationProperty Name="PartyAddresses" Relationship="Self.FK_PartyAddress_Party" FromRole="Party" ToRole="PartyAddress" />
+          <NavigationProperty Name="PartyContacts" Relationship="Self.FK_PartyContacts_Party" FromRole="Party" ToRole="PartyContacts" />
+          <NavigationProperty Name="PartyLedgers" Relationship="Self.FK_PartyLedger_Party" FromRole="Party" ToRole="PartyLedger" />
+          <NavigationProperty Name="PartyLedgerDetails" Relationship="Self.FK_PartyLedgerDetail_Party" FromRole="Party" ToRole="PartyLedgerDetail" />
+          <NavigationProperty Name="PartyVehicles" Relationship="Self.FK_PartyVehicle_Party" FromRole="Party" ToRole="PartyVehicle" />
+          <NavigationProperty Name="PaymentReceiptMasters" Relationship="Self.FK_PaymentReceiptMaster_Party" FromRole="Party" ToRole="PaymentReceiptMaster" />
+        </EntityType>
+        <EntityType Name="PartyAddress">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="PartyID" Type="Int64" Nullable="false" />
+          <Property Name="AddressType" Type="Int64" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CountryID" Type="Int64" />
+          <Property Name="StateID" Type="Int64" />
+          <Property Name="CityID" Type="Int64" />
+          <Property Name="PinCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Party" Relationship="Self.FK_PartyAddress_Party" FromRole="PartyAddress" ToRole="Party" />
+        </EntityType>
+        <EntityType Name="PartyContact">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartyID" Type="Int64" Nullable="false" />
+          <Property Name="PersonName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Designation" Type="Int64" />
+          <Property Name="Department" Type="Int64" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Party" Relationship="Self.FK_PartyContacts_Party" FromRole="PartyContacts" ToRole="Party" />
+        </EntityType>
+        <EntityType Name="PartyLedger">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartyID" Type="Int64" />
+          <Property Name="OPCRDR" Type="Int16" />
+          <Property Name="OpeningBalance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CreditAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DebitAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CLCRDR" Type="Int16" />
+          <Property Name="ClosingBalance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FinancialYearID" Type="Int64" />
+          <NavigationProperty Name="Party" Relationship="Self.FK_PartyLedger_Party" FromRole="PartyLedger" ToRole="Party" />
+        </EntityType>
+        <EntityType Name="PartyLedgerDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartyID" Type="Int64" Nullable="false" />
+          <Property Name="FinancialYearID" Type="Int64" />
+          <Property Name="DocumentID" Type="Int64" />
+          <Property Name="TransactionID" Type="Int64" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
+          <Property Name="CRDB" Type="Int16" />
+          <Property Name="OpeningBalance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CreditAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DebitAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ClosingBalance" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Party" Relationship="Self.FK_PartyLedgerDetail_Party" FromRole="PartyLedgerDetail" ToRole="Party" />
+        </EntityType>
+        <EntityType Name="PartyVehicle">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartyID" Type="Int64" Nullable="false" />
+          <Property Name="VehicleNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="VehicleModel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VehicleManufacturer" Type="Int64" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Party" Relationship="Self.FK_PartyVehicle_Party" FromRole="PartyVehicle" ToRole="Party" />
+        </EntityType>
+        <EntityType Name="PaymentReceiptDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int64" Nullable="false" />
+          <Property Name="DocumentID" Type="Int64" Nullable="false" />
+          <Property Name="PaymentReceiptMasterID" Type="Int64" />
+          <Property Name="TransactionMasterID" Type="Int64" />
+          <Property Name="TransactionNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
+          <Property Name="PayModeID" Type="Int64" />
+          <Property Name="PayAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CompanyBankID" Type="Int64" />
+          <Property Name="PartyBankName" Type="Int64" />
+          <Property Name="PartyBankBranch" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PartyBankIFSC" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PartyBankMICR" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="InstrumentNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PartyBankAccountType" Type="Int64" />
+          <Property Name="InstrumentDate" Type="DateTime" Precision="0" />
+          <Property Name="Remarks" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_PaymentReceiptDetail_Bank" FromRole="PaymentReceiptDetail" ToRole="Company" />
+          <NavigationProperty Name="Company1" Relationship="Self.FK_PaymentReceiptDetail_Company" FromRole="PaymentReceiptDetail" ToRole="Company" />
+          <NavigationProperty Name="PaymentReceiptMaster" Relationship="Self.FK_PaymentReceiptDetail_PaymentReceiptMaster" FromRole="PaymentReceiptDetail" ToRole="PaymentReceiptMaster" />
+        </EntityType>
+        <EntityType Name="PaymentReceiptMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="CompanyID" Type="Int64" Nullable="false" />
+          <Property Name="DocumentID" Type="Int64" Nullable="false" />
+          <Property Name="TransactionMasterID" Type="Int64" />
+          <Property Name="TransactionNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionDate" Type="DateTime" Precision="3" />
+          <Property Name="PartyID" Type="Int64" />
+          <Property Name="BillAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PayAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DueAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Remarks" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_PaymentReceiptMaster_Company" FromRole="PaymentReceiptMaster" ToRole="Company" />
+          <NavigationProperty Name="DocumentsList" Relationship="Self.FK_PaymentReceiptMaster_DocumentsList" FromRole="PaymentReceiptMaster" ToRole="DocumentsList" />
+          <NavigationProperty Name="Party" Relationship="Self.FK_PaymentReceiptMaster_Party" FromRole="PaymentReceiptMaster" ToRole="Party" />
+          <NavigationProperty Name="PaymentReceiptDetails" Relationship="Self.FK_PaymentReceiptDetail_PaymentReceiptMaster" FromRole="PaymentReceiptMaster" ToRole="PaymentReceiptDetail" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryID" Type="Int64" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Banks" Relationship="Self.FK_Bank_State" FromRole="State" ToRole="Bank" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK_City_State" FromRole="State" ToRole="City" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_State_Country" FromRole="State" ToRole="Country" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int64" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QuantityType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Unit_Company" FromRole="Unit" ToRole="Company" />
+          <NavigationProperty Name="ItemMasters" Relationship="Self.FK_ItemMaster_Unit" FromRole="Unit" ToRole="ItemMaster" />
+          <NavigationProperty Name="ItemMasters1" Relationship="Self.FK_ItemMaster_Unit1" FromRole="Unit" ToRole="ItemMaster" />
+          <NavigationProperty Name="ItemMasters2" Relationship="Self.FK_ItemMaster_Unit2" FromRole="Unit" ToRole="ItemMaster" />
+          <NavigationProperty Name="UnitConversions" Relationship="Self.FK_UnitConversion_Unit" FromRole="Unit" ToRole="UnitConversion" />
+          <NavigationProperty Name="UnitConversions1" Relationship="Self.FK_UnitConversion_Unit1" FromRole="Unit" ToRole="UnitConversion" />
+        </EntityType>
+        <EntityType Name="UnitConversion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FromUnitID" Type="Int64" />
+          <Property Name="FromValue" Type="Int32" />
+          <Property Name="ToUnitID" Type="Int64" />
+          <Property Name="ToValue" Type="Int32" />
+          <Property Name="Ratio" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_UnitConversion_Company" FromRole="UnitConversion" ToRole="Company" />
+          <NavigationProperty Name="Unit" Relationship="Self.FK_UnitConversion_Unit" FromRole="UnitConversion" ToRole="Unit" />
+          <NavigationProperty Name="Unit1" Relationship="Self.FK_UnitConversion_Unit1" FromRole="UnitConversion" ToRole="Unit" />
+        </EntityType>
+        <Association Name="FK_Bank_Bank">
+          <End Role="Bank" Type="Self.Bank" Multiplicity="1" />
+          <End Role="Bank1" Type="Self.Bank" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Bank1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bank_State">
+          <End Role="State" Type="Self.State" Multiplicity="0..1" />
+          <End Role="Bank" Type="Self.Bank" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Bank">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_City_State">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyTerms_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="CompanyTerms" Type="Self.CompanyTerm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CompanyTerms">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinancialYear_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="FinancialYear" Type="Self.FinancialYear" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FinancialYear">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemGroup_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="ItemGroup" Type="Self.ItemGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemGroup">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemMaster_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemMaster">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LookupData_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="LookupData" Type="Self.LookupData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LookupData">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Party_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Party" Type="Self.Party" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Party">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentReceiptDetail_Bank">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="PaymentReceiptDetail" Type="Self.PaymentReceiptDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PaymentReceiptDetail">
+              <PropertyRef Name="CompanyBankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentReceiptDetail_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="PaymentReceiptDetail" Type="Self.PaymentReceiptDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PaymentReceiptDetail">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentReceiptMaster_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="PaymentReceiptMaster" Type="Self.PaymentReceiptMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PaymentReceiptMaster">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Unit_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Unit" Type="Self.Unit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Unit">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UnitConversion_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="UnitConversion" Type="Self.UnitConversion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UnitConversion">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_State_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="State" Type="Self.State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="State">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentsDetail_DocumentsList">
+          <End Role="DocumentsList" Type="Self.DocumentsList" Multiplicity="0..1" />
+          <End Role="DocumentsDetail" Type="Self.DocumentsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DocumentsDetail">
+              <PropertyRef Name="DocumentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentsDetail_FinancialYear">
+          <End Role="FinancialYear" Type="Self.FinancialYear" Multiplicity="0..1" />
+          <End Role="DocumentsDetail" Type="Self.DocumentsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinancialYear">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DocumentsDetail">
+              <PropertyRef Name="FinancialYearID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemStockDetail_DocumentsList">
+          <End Role="DocumentsList" Type="Self.DocumentsList" Multiplicity="0..1" />
+          <End Role="ItemStockDetail" Type="Self.ItemStockDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemStockDetail">
+              <PropertyRef Name="DocumentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentReceiptMaster_DocumentsList">
+          <End Role="DocumentsList" Type="Self.DocumentsList" Multiplicity="1" />
+          <End Role="PaymentReceiptMaster" Type="Self.PaymentReceiptMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentsList">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PaymentReceiptMaster">
+              <PropertyRef Name="DocumentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemStock_FinancialYear">
+          <End Role="FinancialYear" Type="Self.FinancialYear" Multiplicity="0..1" />
+          <End Role="ItemStock" Type="Self.ItemStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinancialYear">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemStock">
+              <PropertyRef Name="FinancialYearID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemStockDetail_FinancialYear">
+          <End Role="FinancialYear" Type="Self.FinancialYear" Multiplicity="0..1" />
+          <End Role="ItemStockDetail" Type="Self.ItemStockDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinancialYear">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemStockDetail">
+              <PropertyRef Name="FinancialYearID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemGroup_ItemGroup">
+          <End Role="ItemGroup" Type="Self.ItemGroup" Multiplicity="0..1" />
+          <End Role="ItemGroup1" Type="Self.ItemGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemGroup1">
+              <PropertyRef Name="ParentGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemMaster_ItemGroup">
+          <End Role="ItemGroup" Type="Self.ItemGroup" Multiplicity="1" />
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemMaster">
+              <PropertyRef Name="ItemGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemMaster_ItemHSN">
+          <End Role="ItemHSN" Type="Self.ItemHSN" Multiplicity="0..1" />
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemHSN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemMaster">
+              <PropertyRef Name="ItemHSN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemMaster_Unit">
+          <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemMaster">
+              <PropertyRef Name="PurchaseUnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemMaster_Unit1">
+          <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemMaster">
+              <PropertyRef Name="StockUnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemMaster_Unit2">
+          <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemMaster">
+              <PropertyRef Name="SalesUnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemStock_ItemMaster">
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="0..1" />
+          <End Role="ItemStock" Type="Self.ItemStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemStock">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemStockDetail_ItemMaster">
+          <End Role="ItemMaster" Type="Self.ItemMaster" Multiplicity="1" />
+          <End Role="ItemStockDetail" Type="Self.ItemStockDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemStockDetail">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LookupData_LookupData">
+          <End Role="LookupData" Type="Self.LookupData" Multiplicity="0..1" />
+          <End Role="LookupData1" Type="Self.LookupData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupData">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LookupData1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartyAddress_Party">
+          <End Role="Party" Type="Self.Party" Multiplicity="1" />
+          <End Role="PartyAddress" Type="Self.PartyAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Party">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PartyAddress">
+              <PropertyRef Name="PartyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartyContacts_Party">
+          <End Role="Party" Type="Self.Party" Multiplicity="1" />
+          <End Role="PartyContacts" Type="Self.PartyContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Party">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PartyContacts">
+              <PropertyRef Name="PartyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartyLedger_Party">
+          <End Role="Party" Type="Self.Party" Multiplicity="0..1" />
+          <End Role="PartyLedger" Type="Self.PartyLedger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Party">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PartyLedger">
+              <PropertyRef Name="PartyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartyLedgerDetail_Party">
+          <End Role="Party" Type="Self.Party" Multiplicity="1" />
+          <End Role="PartyLedgerDetail" Type="Self.PartyLedgerDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Party">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PartyLedgerDetail">
+              <PropertyRef Name="PartyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartyVehicle_Party">
+          <End Role="Party" Type="Self.Party" Multiplicity="1" />
+          <End Role="PartyVehicle" Type="Self.PartyVehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Party">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PartyVehicle">
+              <PropertyRef Name="PartyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentReceiptMaster_Party">
+          <End Role="Party" Type="Self.Party" Multiplicity="0..1" />
+          <End Role="PaymentReceiptMaster" Type="Self.PaymentReceiptMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Party">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PaymentReceiptMaster">
+              <PropertyRef Name="PartyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentReceiptDetail_PaymentReceiptMaster">
+          <End Role="PaymentReceiptMaster" Type="Self.PaymentReceiptMaster" Multiplicity="0..1" />
+          <End Role="PaymentReceiptDetail" Type="Self.PaymentReceiptDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentReceiptMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PaymentReceiptDetail">
+              <PropertyRef Name="PaymentReceiptMasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UnitConversion_Unit">
+          <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="UnitConversion" Type="Self.UnitConversion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UnitConversion">
+              <PropertyRef Name="FromUnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UnitConversion_Unit1">
+          <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="UnitConversion" Type="Self.UnitConversion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UnitConversion">
+              <PropertyRef Name="ToUnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InventoryControlEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Banks" EntityType="Self.Bank" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="CompanyBanks" EntityType="Self.CompanyBank" />
+          <EntitySet Name="CompanyLocations" EntityType="Self.CompanyLocation" />
+          <EntitySet Name="CompanyTerms" EntityType="Self.CompanyTerm" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="DocumentsDetails" EntityType="Self.DocumentsDetail" />
+          <EntitySet Name="DocumentsLists" EntityType="Self.DocumentsList" />
+          <EntitySet Name="FinancialYears" EntityType="Self.FinancialYear" />
+          <EntitySet Name="ItemGroups" EntityType="Self.ItemGroup" />
+          <EntitySet Name="ItemHSNs" EntityType="Self.ItemHSN" />
+          <EntitySet Name="ItemImages" EntityType="Self.ItemImage" />
+          <EntitySet Name="ItemMasters" EntityType="Self.ItemMaster" />
+          <EntitySet Name="ItemStocks" EntityType="Self.ItemStock" />
+          <EntitySet Name="ItemStockDetails" EntityType="Self.ItemStockDetail" />
+          <EntitySet Name="LookupDatas" EntityType="Self.LookupData" />
+          <EntitySet Name="Menus" EntityType="Self.Menu" />
+          <EntitySet Name="Parties" EntityType="Self.Party" />
+          <EntitySet Name="PartyAddresses" EntityType="Self.PartyAddress" />
+          <EntitySet Name="PartyContacts" EntityType="Self.PartyContact" />
+          <EntitySet Name="PartyLedgers" EntityType="Self.PartyLedger" />
+          <EntitySet Name="PartyLedgerDetails" EntityType="Self.PartyLedgerDetail" />
+          <EntitySet Name="PartyVehicles" EntityType="Self.PartyVehicle" />
+          <EntitySet Name="PaymentReceiptDetails" EntityType="Self.PaymentReceiptDetail" />
+          <EntitySet Name="PaymentReceiptMasters" EntityType="Self.PaymentReceiptMaster" />
+          <EntitySet Name="States" EntityType="Self.State" />
+          <EntitySet Name="Units" EntityType="Self.Unit" />
+          <EntitySet Name="UnitConversions" EntityType="Self.UnitConversion" />
+          <AssociationSet Name="FK_Bank_Bank" Association="Self.FK_Bank_Bank">
+            <End Role="Bank" EntitySet="Banks" />
+            <End Role="Bank1" EntitySet="Banks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bank_State" Association="Self.FK_Bank_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="Bank" EntitySet="Banks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_City_State" Association="Self.FK_City_State">
+            <End Role="State" EntitySet="States" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyTerms_Company" Association="Self.FK_CompanyTerms_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompanyTerms" EntitySet="CompanyTerms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinancialYear_Company" Association="Self.FK_FinancialYear_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="FinancialYear" EntitySet="FinancialYears" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemGroup_Company" Association="Self.FK_ItemGroup_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="ItemGroup" EntitySet="ItemGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMaster_Company" Association="Self.FK_ItemMaster_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="ItemMaster" EntitySet="ItemMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LookupData_Company" Association="Self.FK_LookupData_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="LookupData" EntitySet="LookupDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Party_Company" Association="Self.FK_Party_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Party" EntitySet="Parties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentReceiptDetail_Bank" Association="Self.FK_PaymentReceiptDetail_Bank">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="PaymentReceiptDetail" EntitySet="PaymentReceiptDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentReceiptDetail_Company" Association="Self.FK_PaymentReceiptDetail_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="PaymentReceiptDetail" EntitySet="PaymentReceiptDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentReceiptMaster_Company" Association="Self.FK_PaymentReceiptMaster_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="PaymentReceiptMaster" EntitySet="PaymentReceiptMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Unit_Company" Association="Self.FK_Unit_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Unit" EntitySet="Units" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UnitConversion_Company" Association="Self.FK_UnitConversion_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="UnitConversion" EntitySet="UnitConversions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_State_Country" Association="Self.FK_State_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="State" EntitySet="States" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentsDetail_DocumentsList" Association="Self.FK_DocumentsDetail_DocumentsList">
+            <End Role="DocumentsList" EntitySet="DocumentsLists" />
+            <End Role="DocumentsDetail" EntitySet="DocumentsDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentsDetail_FinancialYear" Association="Self.FK_DocumentsDetail_FinancialYear">
+            <End Role="FinancialYear" EntitySet="FinancialYears" />
+            <End Role="DocumentsDetail" EntitySet="DocumentsDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemStockDetail_DocumentsList" Association="Self.FK_ItemStockDetail_DocumentsList">
+            <End Role="DocumentsList" EntitySet="DocumentsLists" />
+            <End Role="ItemStockDetail" EntitySet="ItemStockDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentReceiptMaster_DocumentsList" Association="Self.FK_PaymentReceiptMaster_DocumentsList">
+            <End Role="DocumentsList" EntitySet="DocumentsLists" />
+            <End Role="PaymentReceiptMaster" EntitySet="PaymentReceiptMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemStock_FinancialYear" Association="Self.FK_ItemStock_FinancialYear">
+            <End Role="FinancialYear" EntitySet="FinancialYears" />
+            <End Role="ItemStock" EntitySet="ItemStocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemStockDetail_FinancialYear" Association="Self.FK_ItemStockDetail_FinancialYear">
+            <End Role="FinancialYear" EntitySet="FinancialYears" />
+            <End Role="ItemStockDetail" EntitySet="ItemStockDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemGroup_ItemGroup" Association="Self.FK_ItemGroup_ItemGroup">
+            <End Role="ItemGroup" EntitySet="ItemGroups" />
+            <End Role="ItemGroup1" EntitySet="ItemGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMaster_ItemGroup" Association="Self.FK_ItemMaster_ItemGroup">
+            <End Role="ItemGroup" EntitySet="ItemGroups" />
+            <End Role="ItemMaster" EntitySet="ItemMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMaster_ItemHSN" Association="Self.FK_ItemMaster_ItemHSN">
+            <End Role="ItemHSN" EntitySet="ItemHSNs" />
+            <End Role="ItemMaster" EntitySet="ItemMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMaster_Unit" Association="Self.FK_ItemMaster_Unit">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="ItemMaster" EntitySet="ItemMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMaster_Unit1" Association="Self.FK_ItemMaster_Unit1">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="ItemMaster" EntitySet="ItemMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemMaster_Unit2" Association="Self.FK_ItemMaster_Unit2">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="ItemMaster" EntitySet="ItemMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemStock_ItemMaster" Association="Self.FK_ItemStock_ItemMaster">
+            <End Role="ItemMaster" EntitySet="ItemMasters" />
+            <End Role="ItemStock" EntitySet="ItemStocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemStockDetail_ItemMaster" Association="Self.FK_ItemStockDetail_ItemMaster">
+            <End Role="ItemMaster" EntitySet="ItemMasters" />
+            <End Role="ItemStockDetail" EntitySet="ItemStockDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LookupData_LookupData" Association="Self.FK_LookupData_LookupData">
+            <End Role="LookupData" EntitySet="LookupDatas" />
+            <End Role="LookupData1" EntitySet="LookupDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartyAddress_Party" Association="Self.FK_PartyAddress_Party">
+            <End Role="Party" EntitySet="Parties" />
+            <End Role="PartyAddress" EntitySet="PartyAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartyContacts_Party" Association="Self.FK_PartyContacts_Party">
+            <End Role="Party" EntitySet="Parties" />
+            <End Role="PartyContacts" EntitySet="PartyContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartyLedger_Party" Association="Self.FK_PartyLedger_Party">
+            <End Role="Party" EntitySet="Parties" />
+            <End Role="PartyLedger" EntitySet="PartyLedgers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartyLedgerDetail_Party" Association="Self.FK_PartyLedgerDetail_Party">
+            <End Role="Party" EntitySet="Parties" />
+            <End Role="PartyLedgerDetail" EntitySet="PartyLedgerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartyVehicle_Party" Association="Self.FK_PartyVehicle_Party">
+            <End Role="Party" EntitySet="Parties" />
+            <End Role="PartyVehicle" EntitySet="PartyVehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentReceiptMaster_Party" Association="Self.FK_PaymentReceiptMaster_Party">
+            <End Role="Party" EntitySet="Parties" />
+            <End Role="PaymentReceiptMaster" EntitySet="PaymentReceiptMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentReceiptDetail_PaymentReceiptMaster" Association="Self.FK_PaymentReceiptDetail_PaymentReceiptMaster">
+            <End Role="PaymentReceiptMaster" EntitySet="PaymentReceiptMasters" />
+            <End Role="PaymentReceiptDetail" EntitySet="PaymentReceiptDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UnitConversion_Unit" Association="Self.FK_UnitConversion_Unit">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="UnitConversion" EntitySet="UnitConversions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UnitConversion_Unit1" Association="Self.FK_UnitConversion_Unit1">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="UnitConversion" EntitySet="UnitConversions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InventoryControlModelStoreContainer" CdmEntityContainer="InventoryControlEntities">
+          <EntitySetMapping Name="Banks">
+            <EntityTypeMapping TypeName="InventoryControlModel.Bank">
+              <MappingFragment StoreEntitySet="Bank">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="IFSCCode" ColumnName="IFSCCode" />
+                <ScalarProperty Name="MICRCode" ColumnName="MICRCode" />
+                <ScalarProperty Name="BranchAddress" ColumnName="BranchAddress" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="InventoryControlModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="InventoryControlModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OrganizationTypeID" ColumnName="OrganizationTypeID" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="IndustryType" ColumnName="IndustryType" />
+                <ScalarProperty Name="BusinessType" ColumnName="BusinessType" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="MfgLicenceNo" ColumnName="MfgLicenceNo" />
+                <ScalarProperty Name="MfgLicenceExpDate" ColumnName="MfgLicenceExpDate" />
+                <ScalarProperty Name="DrugLicenceNo" ColumnName="DrugLicenceNo" />
+                <ScalarProperty Name="DrugLicenceExpDate" ColumnName="DrugLicenceExpDate" />
+                <ScalarProperty Name="FoodLicenceNo" ColumnName="FoodLicenceNo" />
+                <ScalarProperty Name="FoodLicenceExpDate" ColumnName="FoodLicenceExpDate" />
+                <ScalarProperty Name="GSTIN" ColumnName="GSTIN" />
+                <ScalarProperty Name="GSTINExpDate" ColumnName="GSTINExpDate" />
+                <ScalarProperty Name="TAN" ColumnName="TAN" />
+                <ScalarProperty Name="TANExpDate" ColumnName="TANExpDate" />
+                <ScalarProperty Name="PAN" ColumnName="PAN" />
+                <ScalarProperty Name="RegistrationType" ColumnName="RegistrationType" />
+                <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+                <ScalarProperty Name="TaxStructureID" ColumnName="TaxStructureID" />
+                <ScalarProperty Name="FinancialYearID" ColumnName="FinancialYearID" />
+                <ScalarProperty Name="StockValuationTypeID" ColumnName="StockValuationTypeID" />
+                <ScalarProperty Name="Jurisdiction" ColumnName="Jurisdiction" />
+                <ScalarProperty Name="BaseCurrencyID" ColumnName="BaseCurrencyID" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyBanks">
+            <EntityTypeMapping TypeName="InventoryControlModel.CompanyBank">
+              <MappingFragment StoreEntitySet="CompanyBank">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="BankID" ColumnName="BankID" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="IFSCCode" ColumnName="IFSCCode" />
+                <ScalarProperty Name="MICRCode" ColumnName="MICRCode" />
+                <ScalarProperty Name="BranchAddress" ColumnName="BranchAddress" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyLocations">
+            <EntityTypeMapping TypeName="InventoryControlModel.CompanyLocation">
+              <MappingFragment StoreEntitySet="CompanyLocation">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="IsVertual" ColumnName="IsVertual" />
+                <ScalarProperty Name="VertualLocationID" ColumnName="VertualLocationID" />
+                <ScalarProperty Name="LocationTypeID" ColumnName="LocationTypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="AreaUnitID" ColumnName="AreaUnitID" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyTerms">
+            <EntityTypeMapping TypeName="InventoryControlModel.CompanyTerm">
+              <MappingFragment StoreEntitySet="CompanyTerms">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="TermType" ColumnName="TermType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="ISActive" ColumnName="ISActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="InventoryControlModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentsDetails">
+            <EntityTypeMapping TypeName="InventoryControlModel.DocumentsDetail">
+              <MappingFragment StoreEntitySet="DocumentsDetail">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="FinancialYearID" ColumnName="FinancialYearID" />
+                <ScalarProperty Name="MonthNo" ColumnName="MonthNo" />
+                <ScalarProperty Name="StartNo" ColumnName="StartNo" />
+                <ScalarProperty Name="CurrentNo" ColumnName="CurrentNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentsLists">
+            <EntityTypeMapping TypeName="InventoryControlModel.DocumentsList">
+              <MappingFragment StoreEntitySet="DocumentsList">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DocCode" ColumnName="DocCode" />
+                <ScalarProperty Name="DocName" ColumnName="DocName" />
+                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+                <ScalarProperty Name="EffectPlusMinus" ColumnName="EffectPlusMinus" />
+                <ScalarProperty Name="Separator" ColumnName="Separator" />
+                <ScalarProperty Name="ISMonthly" ColumnName="ISMonthly" />
+                <ScalarProperty Name="MonthFormat" ColumnName="MonthFormat" />
+                <ScalarProperty Name="YearFormat" ColumnName="YearFormat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinancialYears">
+            <EntityTypeMapping TypeName="InventoryControlModel.FinancialYear">
+              <MappingFragment StoreEntitySet="FinancialYear">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="IsCurrentYear" ColumnName="IsCurrentYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemGroups">
+            <EntityTypeMapping TypeName="InventoryControlModel.ItemGroup">
+              <MappingFragment StoreEntitySet="ItemGroup">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParentGroupID" ColumnName="ParentGroupID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemHSNs">
+            <EntityTypeMapping TypeName="InventoryControlModel.ItemHSN">
+              <MappingFragment StoreEntitySet="ItemHSN">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HSNCode" ColumnName="HSNCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CGST" ColumnName="CGST" />
+                <ScalarProperty Name="SGST" ColumnName="SGST" />
+                <ScalarProperty Name="IGST" ColumnName="IGST" />
+                <ScalarProperty Name="EffectiveFrom" ColumnName="EffectiveFrom" />
+                <ScalarProperty Name="AmendmentNo" ColumnName="AmendmentNo" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemImages">
+            <EntityTypeMapping TypeName="InventoryControlModel.ItemImage">
+              <MappingFragment StoreEntitySet="ItemImages">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="ImageType" ColumnName="ImageType" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemMasters">
+            <EntityTypeMapping TypeName="InventoryControlModel.ItemMaster">
+              <MappingFragment StoreEntitySet="ItemMaster">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="ItemGroupID" ColumnName="ItemGroupID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Specification" ColumnName="Specification" />
+                <ScalarProperty Name="IsExpired" ColumnName="IsExpired" />
+                <ScalarProperty Name="ItemHSN" ColumnName="ItemHSN" />
+                <ScalarProperty Name="PurchaseUnitID" ColumnName="PurchaseUnitID" />
+                <ScalarProperty Name="StockUnitID" ColumnName="StockUnitID" />
+                <ScalarProperty Name="ProductionUnitID" ColumnName="ProductionUnitID" />
+                <ScalarProperty Name="SalesUnitID" ColumnName="SalesUnitID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="MinOrderQty" ColumnName="MinOrderQty" />
+                <ScalarProperty Name="MaxStockLevel" ColumnName="MaxStockLevel" />
+                <ScalarProperty Name="MinStockLevel" ColumnName="MinStockLevel" />
+                <ScalarProperty Name="SafetyStockLevel" ColumnName="SafetyStockLevel" />
+                <ScalarProperty Name="MinLotSize" ColumnName="MinLotSize" />
+                <ScalarProperty Name="MaxLotSize" ColumnName="MaxLotSize" />
+                <ScalarProperty Name="DimensionUnitID" ColumnName="DimensionUnitID" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="WeightUnitID" ColumnName="WeightUnitID" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemStocks">
+            <EntityTypeMapping TypeName="InventoryControlModel.ItemStock">
+              <MappingFragment StoreEntitySet="ItemStock">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="OpeningStock" ColumnName="OpeningStock" />
+                <ScalarProperty Name="ReeceivedStock" ColumnName="ReeceivedStock" />
+                <ScalarProperty Name="IssuedStock" ColumnName="IssuedStock" />
+                <ScalarProperty Name="ClosingStock" ColumnName="ClosingStock" />
+                <ScalarProperty Name="FinancialYearID" ColumnName="FinancialYearID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemStockDetails">
+            <EntityTypeMapping TypeName="InventoryControlModel.ItemStockDetail">
+              <MappingFragment StoreEntitySet="ItemStockDetail">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="FinancialYearID" ColumnName="FinancialYearID" />
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="OpeningStock" ColumnName="OpeningStock" />
+                <ScalarProperty Name="TransactionQty" ColumnName="TransactionQty" />
+                <ScalarProperty Name="ClosingStock" ColumnName="ClosingStock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LookupDatas">
+            <EntityTypeMapping TypeName="InventoryControlModel.LookupData">
+              <MappingFragment StoreEntitySet="LookupData">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="InventoryControlModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+                <ScalarProperty Name="MenuType" ColumnName="MenuType" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="DefaultURL" ColumnName="DefaultURL" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Tooltips" ColumnName="Tooltips" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parties">
+            <EntityTypeMapping TypeName="InventoryControlModel.Party">
+              <MappingFragment StoreEntitySet="Party">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="PartyType" ColumnName="PartyType" />
+                <ScalarProperty Name="FirmType" ColumnName="FirmType" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="RegistrationType" ColumnName="RegistrationType" />
+                <ScalarProperty Name="GSTIN" ColumnName="GSTIN" />
+                <ScalarProperty Name="GSTINExpDate" ColumnName="GSTINExpDate" />
+                <ScalarProperty Name="TAN" ColumnName="TAN" />
+                <ScalarProperty Name="TANExpDate" ColumnName="TANExpDate" />
+                <ScalarProperty Name="PAN" ColumnName="PAN" />
+                <ScalarProperty Name="PANExpDate" ColumnName="PANExpDate" />
+                <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+                <ScalarProperty Name="RegistrationExpDate" ColumnName="RegistrationExpDate" />
+                <ScalarProperty Name="MfgLicenceNo" ColumnName="MfgLicenceNo" />
+                <ScalarProperty Name="MfgLicenceExpDate" ColumnName="MfgLicenceExpDate" />
+                <ScalarProperty Name="DrugLicenceNo" ColumnName="DrugLicenceNo" />
+                <ScalarProperty Name="DrugLicenceExpDate" ColumnName="DrugLicenceExpDate" />
+                <ScalarProperty Name="FoodLicenceNo" ColumnName="FoodLicenceNo" />
+                <ScalarProperty Name="FoodLicenceExpDate" ColumnName="FoodLicenceExpDate" />
+                <ScalarProperty Name="CRDR" ColumnName="CRDR" />
+                <ScalarProperty Name="OpeningBalance" ColumnName="OpeningBalance" />
+                <ScalarProperty Name="ClosingBalance" ColumnName="ClosingBalance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartyAddresses">
+            <EntityTypeMapping TypeName="InventoryControlModel.PartyAddress">
+              <MappingFragment StoreEntitySet="PartyAddress">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PartyID" ColumnName="PartyID" />
+                <ScalarProperty Name="AddressType" ColumnName="AddressType" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartyContacts">
+            <EntityTypeMapping TypeName="InventoryControlModel.PartyContact">
+              <MappingFragment StoreEntitySet="PartyContacts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PartyID" ColumnName="PartyID" />
+                <ScalarProperty Name="PersonName" ColumnName="PersonName" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartyLedgers">
+            <EntityTypeMapping TypeName="InventoryControlModel.PartyLedger">
+              <MappingFragment StoreEntitySet="PartyLedger">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PartyID" ColumnName="PartyID" />
+                <ScalarProperty Name="OPCRDR" ColumnName="OPCRDR" />
+                <ScalarProperty Name="OpeningBalance" ColumnName="OpeningBalance" />
+                <ScalarProperty Name="CreditAmount" ColumnName="CreditAmount" />
+                <ScalarProperty Name="DebitAmount" ColumnName="DebitAmount" />
+                <ScalarProperty Name="CLCRDR" ColumnName="CLCRDR" />
+                <ScalarProperty Name="ClosingBalance" ColumnName="ClosingBalance" />
+                <ScalarProperty Name="FinancialYearID" ColumnName="FinancialYearID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartyLedgerDetails">
+            <EntityTypeMapping TypeName="InventoryControlModel.PartyLedgerDetail">
+              <MappingFragment StoreEntitySet="PartyLedgerDetail">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PartyID" ColumnName="PartyID" />
+                <ScalarProperty Name="FinancialYearID" ColumnName="FinancialYearID" />
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="CRDB" ColumnName="CRDB" />
+                <ScalarProperty Name="OpeningBalance" ColumnName="OpeningBalance" />
+                <ScalarProperty Name="CreditAmount" ColumnName="CreditAmount" />
+                <ScalarProperty Name="DebitAmount" ColumnName="DebitAmount" />
+                <ScalarProperty Name="ClosingBalance" ColumnName="ClosingBalance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartyVehicles">
+            <EntityTypeMapping TypeName="InventoryControlModel.PartyVehicle">
+              <MappingFragment StoreEntitySet="PartyVehicle">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PartyID" ColumnName="PartyID" />
+                <ScalarProperty Name="VehicleNo" ColumnName="VehicleNo" />
+                <ScalarProperty Name="VehicleModel" ColumnName="VehicleModel" />
+                <ScalarProperty Name="VehicleManufacturer" ColumnName="VehicleManufacturer" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentReceiptDetails">
+            <EntityTypeMapping TypeName="InventoryControlModel.PaymentReceiptDetail">
+              <MappingFragment StoreEntitySet="PaymentReceiptDetail">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="PaymentReceiptMasterID" ColumnName="PaymentReceiptMasterID" />
+                <ScalarProperty Name="TransactionMasterID" ColumnName="TransactionMasterID" />
+                <ScalarProperty Name="TransactionNo" ColumnName="TransactionNo" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="PayModeID" ColumnName="PayModeID" />
+                <ScalarProperty Name="PayAmount" ColumnName="PayAmount" />
+                <ScalarProperty Name="CompanyBankID" ColumnName="CompanyBankID" />
+                <ScalarProperty Name="PartyBankName" ColumnName="PartyBankName" />
+                <ScalarProperty Name="PartyBankBranch" ColumnName="PartyBankBranch" />
+                <ScalarProperty Name="PartyBankIFSC" ColumnName="PartyBankIFSC" />
+                <ScalarProperty Name="PartyBankMICR" ColumnName="PartyBankMICR" />
+                <ScalarProperty Name="InstrumentNo" ColumnName="InstrumentNo" />
+                <ScalarProperty Name="PartyBankAccountType" ColumnName="PartyBankAccountType" />
+                <ScalarProperty Name="InstrumentDate" ColumnName="InstrumentDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentReceiptMasters">
+            <EntityTypeMapping TypeName="InventoryControlModel.PaymentReceiptMaster">
+              <MappingFragment StoreEntitySet="PaymentReceiptMaster">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="TransactionMasterID" ColumnName="TransactionMasterID" />
+                <ScalarProperty Name="TransactionNo" ColumnName="TransactionNo" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="PartyID" ColumnName="PartyID" />
+                <ScalarProperty Name="BillAmount" ColumnName="BillAmount" />
+                <ScalarProperty Name="PayAmount" ColumnName="PayAmount" />
+                <ScalarProperty Name="DueAmount" ColumnName="DueAmount" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="InventoryControlModel.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Units">
+            <EntityTypeMapping TypeName="InventoryControlModel.Unit">
+              <MappingFragment StoreEntitySet="Unit">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="QuantityType" ColumnName="QuantityType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitConversions">
+            <EntityTypeMapping TypeName="InventoryControlModel.UnitConversion">
+              <MappingFragment StoreEntitySet="UnitConversion">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FromUnitID" ColumnName="FromUnitID" />
+                <ScalarProperty Name="FromValue" ColumnName="FromValue" />
+                <ScalarProperty Name="ToUnitID" ColumnName="ToUnitID" />
+                <ScalarProperty Name="ToValue" ColumnName="ToValue" />
+                <ScalarProperty Name="Ratio" ColumnName="Ratio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a78c8a2ee45b4363b358d76f3aeec266" Name="Diagram1">
+        <EntityTypeShape EntityType="InventoryControlModel.Bank" Width="1.5" PointX="10.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.City" Width="1.5" PointX="10.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.Company" Width="1.5" PointX="0.75" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.CompanyBank" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.CompanyLocation" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.CompanyTerm" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.Country" Width="1.5" PointX="5.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.DocumentsDetail" Width="1.5" PointX="5.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.DocumentsList" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.FinancialYear" Width="1.5" PointX="3" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.ItemGroup" Width="1.5" PointX="3" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.ItemHSN" Width="1.5" PointX="6" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.ItemImage" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.ItemMaster" Width="1.5" PointX="8.25" PointY="28.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.ItemStock" Width="1.5" PointX="8.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.ItemStockDetail" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.LookupData" Width="1.5" PointX="3" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.Menu" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.Party" Width="1.5" PointX="3" PointY="30.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.PartyAddress" Width="1.5" PointX="5.25" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.PartyContact" Width="1.5" PointX="5.25" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.PartyLedger" Width="1.5" PointX="5.25" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.PartyLedgerDetail" Width="1.5" PointX="5.25" PointY="37.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.PartyVehicle" Width="1.5" PointX="5.25" PointY="41.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.PaymentReceiptDetail" Width="1.5" PointX="13.5" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.PaymentReceiptMaster" Width="1.5" PointX="11.25" PointY="30.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.State" Width="1.5" PointX="8" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.Unit" Width="1.5" PointX="3" PointY="44.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryControlModel.UnitConversion" Width="1.5" PointX="8.25" PointY="37.875" IsExpanded="true" />
+        <AssociationConnector Association="InventoryControlModel.FK_Bank_Bank" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_Bank_State" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_City_State" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_CompanyTerms_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_FinancialYear_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_ItemGroup_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_ItemMaster_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_LookupData_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_Party_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_PaymentReceiptDetail_Bank" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_PaymentReceiptDetail_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_PaymentReceiptMaster_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_Unit_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_UnitConversion_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_State_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_DocumentsDetail_DocumentsList" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_DocumentsDetail_FinancialYear" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_ItemStockDetail_DocumentsList" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_PaymentReceiptMaster_DocumentsList" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_ItemStock_FinancialYear" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_ItemStockDetail_FinancialYear" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_ItemGroup_ItemGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_ItemMaster_ItemGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_ItemMaster_ItemHSN" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_ItemMaster_Unit" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_ItemMaster_Unit1" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_ItemMaster_Unit2" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_ItemStock_ItemMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_ItemStockDetail_ItemMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_LookupData_LookupData" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_PartyAddress_Party" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_PartyContacts_Party" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_PartyLedger_Party" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_PartyLedgerDetail_Party" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_PartyVehicle_Party" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_PaymentReceiptMaster_Party" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_PaymentReceiptDetail_PaymentReceiptMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_UnitConversion_Unit" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryControlModel.FK_UnitConversion_Unit1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -195,6 +195,9 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\apiItemMasterDir\ItemGroupsController.cs" />
     <Compile Include="Controllers\apiItemMasterDir\ItemHSNsController.cs" />
+    <Compile Include="Controllers\apiItemMasterDir\ItemMastersController.cs" />
+    <Compile Include="Controllers\apiItemMasterDir\ItemStockDetailsController.cs" />
+    <Compile Include="Controllers\apiItemMasterDir\ItemStocksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">

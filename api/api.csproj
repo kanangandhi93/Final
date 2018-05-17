@@ -198,6 +198,7 @@
     <Compile Include="Controllers\apiItemMasterDir\ItemMastersController.cs" />
     <Compile Include="Controllers\apiItemMasterDir\ItemStockDetailsController.cs" />
     <Compile Include="Controllers\apiItemMasterDir\ItemStocksController.cs" />
+    <Compile Include="Controllers\apiMenuDir\MenusController.cs" />
     <Compile Include="Controllers\apiUnitMasterDir\UnitConversionsController.cs" />
     <Compile Include="Controllers\apiUnitMasterDir\UnitsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

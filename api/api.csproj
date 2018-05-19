@@ -211,6 +211,8 @@
     <Compile Include="Controllers\apiPartyDir\PartyLedgerDetailsController.cs" />
     <Compile Include="Controllers\apiPartyDir\PartyLedgersController.cs" />
     <Compile Include="Controllers\apiPartyDir\PartyVehiclesController.cs" />
+    <Compile Include="Controllers\apiPaymentDir\PaymentReceiptDetailsController.cs" />
+    <Compile Include="Controllers\apiPaymentDir\PaymentReceiptMastersController.cs" />
     <Compile Include="Controllers\apiUnitMasterDir\UnitConversionsController.cs" />
     <Compile Include="Controllers\apiUnitMasterDir\UnitsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

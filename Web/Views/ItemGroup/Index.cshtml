@@ -12,7 +12,8 @@
     $(document).ready(function () {
         $('#alert').hide();
         $('#editable').DataTable();
-        $('#lblMessage').text('HI');
+        
+        $("#showLoad").show();
 
         var mode = 'Insert';
 
@@ -114,7 +115,11 @@
         });
         BindGroups();
         BindParentGroups();
+        $("#showLoad").hide();
+
         function BindGroups() {
+            $("#showLoad").show();
+            $('#vectorLayerslist').hide();
             $.ajax({
                 type: 'GET',
                 url: 'http://localhost:41195/api/ItemGroups',
@@ -142,6 +147,8 @@
 
                     // append the table once
                     vectorLayersList.append(content);
+                    $("#showLoad").hide();
+                    $('#vectorLayerslist').show();
 
                     // attach event handlers
                     vectorLayersList.on('click', '.edit', function () {
@@ -207,7 +214,9 @@
 </script>
 <input type="hidden" id="hdn" />
 
+
 <div class="container-fluid">
+    <div id="showLoad" style="width:60px;height:25px;background-color:papayawhip;">Loading...</div>
     <div data-widget-group="group1">
         <div class="row">
             <div class="col-md-12">
@@ -220,9 +229,6 @@
                         <h2>Item Group Data</h2>
                         <div class="panel-ctrls"></div>
                     </div>
-
-                    @*<div id="vectorLayerslist" class="panel-body no-padding"></div>*@
-
 
                     <div class="panel-body no-padding">
 

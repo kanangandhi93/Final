@@ -219,6 +219,7 @@
     <Compile Include="Controllers\Others\CitiesController.cs" />
     <Compile Include="Controllers\Others\CountriesController.cs" />
     <Compile Include="Controllers\Others\FinancialYearsController.cs" />
+    <Compile Include="Controllers\Others\LookupDatasController.cs" />
     <Compile Include="Controllers\Others\StatesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">

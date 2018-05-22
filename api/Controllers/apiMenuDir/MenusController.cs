@@ -19,20 +19,21 @@ namespace api.Controllers.apiMenuDir
         // GET: api/Menus
         public IQueryable<Menu> GetMenus()
         {
+            //return db.Menus.Where(i => i.ParentID == 0);
             return db.Menus;
         }
 
         // GET: api/Menus/5
         [ResponseType(typeof(Menu))]
-        public IHttpActionResult GetMenu(long id)
+        public IQueryable<Menu> GetMenu(long id)
         {
-            Menu menu = db.Menus.Find(id);
-            if (menu == null)
-            {
-                return NotFound();
-            }
+            return db.Menus.Where(i=>i.ParentID==id);
+            //if (menu == null)
+            //{
+            //    return NotFound();
+            //}
 
-            return Ok(menu);
+            //return Ok(menu);
         }
 
         // PUT: api/Menus/5

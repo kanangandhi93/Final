@@ -1,4 +1,57 @@
-﻿<ul class="acc-menu">
+﻿<script src="~/scripts/js/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        BindMenus();
+        function BindMenus() {
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:41195/api/Menus',
+                dataType: 'json',
+                success: function (response) {
+                    var Layers = response;
+
+                    var vectorLayersList = $('#vectorLayerslist1');
+                    vectorLayersList.empty();
+                    // build the table
+                    var content;
+                   
+                    content = '<ul class="acc-menu"> <li class="nav-separator"><span>Explore</span></li>'
+
+                    $.each(Layers, function () {
+                        var f = true;
+                        // we'll store the ID in HTML5 data-attribute for later
+                        content += '<li>'
+
+                        if (this.Title) {
+                            //if (f) {
+                            content += '<a href="' + this.DefaultURL + '"><i class="ti ti-home"></i><span>' + this.Title + '</span></a>'
+                            console.log(content)
+                            //}
+                        }
+
+                        content += '</li>'
+
+
+                    });
+                    // content += '</tbody></table>';
+
+                    // append the table once
+                    content += '</ul>'
+                    vectorLayersList.append(content);
+
+                },
+                error: function (xhr, status, error) {
+                    $('#lblMessage').text(xhr.statustext);
+
+                }
+            });
+        }
+    });
+</script>
+
+
+    <div id="vectorLayerslist1"></div>
+@*<ul class="acc-menu">
     <li class="nav-separator"><span>Explore</span></li>
     <li><a href="index.html"><i class="ti ti-home"></i><span>Dashboard</span><span class="badge badge-teal">2</span></a></li>
     <li><a href="angular/app/index.html"><i class="ti ti-shield"></i><span>AngularJS</span></span></a></li>
@@ -118,4 +171,4 @@
     <li class="nav-separator"><span>Extras</span></li>
     <li><a href="app-inbox.html"><i class="ti ti-email"></i><span>Inbox</span><span class="badge badge-danger">3</span></a></li>
     <li><a href="extras-calendar.html"><i class="ti ti-calendar	"></i><span>Calendar</span><span class="badge badge-orange">1</span></a></li>
-</ul>
+</ul>*@

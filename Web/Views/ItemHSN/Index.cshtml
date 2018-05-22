@@ -60,12 +60,13 @@
         $('#btnSave').click(function () {
             //CheckValidation();
             var PId;
-            if ($('#ddl').val() == 0) {
+            if ($('#ddl').val() == -1) {
                 PId = null;
             }
             else {
                 PId = $('#ddl').val();
             }
+            console.log(PId)
             var obj = new Object();
             obj.HSNCode = $('#txtCode').val();
             obj.Name = $('#txtName').val();
@@ -74,7 +75,7 @@
             obj.IGST = $('#txtIGST').val();
             obj.EffectiveFrom = $('#txtEffectiveFrom').val();
             obj.AmendmentNo = $('#txtAmendmentNo').val();
-            obj.ParentGroupID = PId;
+            obj.ParentID = PId;
             obj.CompanyID = 1;
 
             if (mode == 'Insert') {
@@ -175,13 +176,19 @@
                             type: 'GET',
                             url: 'http://localhost:41195/api/ItemHSNs/' + id,
                             success: function (response) {
-                                $('#txtCode').val(response.Code);
+                                $('#txtCode').val(response.HSNCode);
                                 $('#txtName').val(response.Name);
-                                if (response.ParentGroupID == null) {
+                                $('#txtCGST').val(response.CGST);
+                                $('#txtSGST').val(response.SGST);
+                                $('#txtIGST').val(response.IGST);
+                                $('#txtEffectiveFrom').val(response.EffectiveFrom);
+                                $('#txtAmendmentNo').val(response.AmendmentNo);
+
+                                if (response.ParentID == null) {
                                     $('#ddl').val(0);
                                 }
                                 else {
-                                    $('#ddl').val(response.ParentGroupID);
+                                    $('#ddl').val(response.ParentID);
                                 }
                                 $('#hdn').val(response.ID);
                                 mode = 'Edit';

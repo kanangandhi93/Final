@@ -19,7 +19,7 @@ namespace api.Controllers.Others
         // GET: api/FinancialYears
         public IEnumerable<FinancialYear> GetFinancialYears()
         {
-            return db.FinancialYears;
+            return db.FinancialYears.Where(i => i.IsCurrentYear == true);
         }
 
         // GET: api/FinancialYears/5
@@ -37,14 +37,14 @@ namespace api.Controllers.Others
 
         // PUT: api/FinancialYears/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutFinancialYear(long id, FinancialYear financialYear)
+        public IHttpActionResult PutFinancialYear(FinancialYear financialYear)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != financialYear.ID)
+            if (financialYear.ID != financialYear.ID)
             {
                 return BadRequest();
             }
@@ -57,7 +57,7 @@ namespace api.Controllers.Others
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!FinancialYearExists(id))
+                if (!FinancialYearExists(financialYear.ID))
                 {
                     return NotFound();
                 }

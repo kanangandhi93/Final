@@ -12,15 +12,36 @@ using api.Models;
 
 namespace api.Controllers.apiUnitMasterDir
 {
-    
+    public class clsUnit
+    {
+        public long ID { get; set; }
+        public Nullable<long> CompanyID { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public string QuantityType { get; set; }
+    }
     public class UnitsController : ApiController
     {
         private InventoryControlEntities db = new InventoryControlEntities();
 
         // GET: api/Units
-        public IEnumerable<Unit> GetUnits()
+        public IEnumerable<clsUnit> GetUnits()
         {
-            return db.Units;
+            List<clsUnit> lst = new List<clsUnit>();
+            var rr= db.Units.Select(i=> new{ i.ID, i.CompanyID, i.Code,i.Name,i.QuantityType}).ToList();
+            foreach (var item in rr)
+            {
+                clsUnit cu = new clsUnit()
+                {
+                    Code = item.Code,
+                    CompanyID = item.CompanyID,
+                    ID = item.ID,
+                    Name = item.Name,
+                    QuantityType = item.QuantityType
+                };
+                lst.Add(cu);
+            }
+            return lst;
         }
 
         // GET: api/Units/5
@@ -38,14 +59,14 @@ namespace api.Controllers.apiUnitMasterDir
 
         // PUT: api/Units/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUnit(long id, Unit unit)
+        public IHttpActionResult PutUnit(Unit unit)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != unit.ID)
+            if (unit.ID != unit.ID)
             {
                 return BadRequest();
             }
@@ -58,7 +79,7 @@ namespace api.Controllers.apiUnitMasterDir
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UnitExists(id))
+                if (!UnitExists(unit.ID))
                 {
                     return NotFound();
                 }

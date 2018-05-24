@@ -126,6 +126,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DirItemMaster\ItemGroupController.cs" />
     <Compile Include="Controllers\DirItemMaster\ItemHSNController.cs" />
+    <Compile Include="Controllers\DirUnitMaster\UnitController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuMasterDir\menuController.cs" />
     <Compile Include="Controllers\Others\FiancialYearController.cs" />
@@ -146,6 +147,7 @@
     <Content Include="Views\ItemHSN\Index.cshtml" />
     <Content Include="Views\menu\Index.cshtml" />
     <Content Include="Views\FiancialYear\Index.cshtml" />
+    <Content Include="Views\Unit\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

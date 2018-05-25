@@ -76,14 +76,14 @@ namespace api.Controllers.apiUnitMasterDir
 
         // PUT: api/UnitConversions/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUnitConversion(long id, UnitConversion unitConversion)
+        public IHttpActionResult PutUnitConversion(UnitConversion unitConversion)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != unitConversion.ID)
+            if (unitConversion.ID != unitConversion.ID)
             {
                 return BadRequest();
             }
@@ -96,7 +96,7 @@ namespace api.Controllers.apiUnitMasterDir
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UnitConversionExists(id))
+                if (!UnitConversionExists(unitConversion.ID))
                 {
                     return NotFound();
                 }

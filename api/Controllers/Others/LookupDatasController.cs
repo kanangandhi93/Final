@@ -67,14 +67,14 @@ namespace api.Controllers.Others
 
         // PUT: api/LookupDatas/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutLookupData(long id, LookupData lookupData)
+        public IHttpActionResult PutLookupData(LookupData lookupData)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != lookupData.ID)
+            if (lookupData.ID != lookupData.ID)
             {
                 return BadRequest();
             }
@@ -87,7 +87,7 @@ namespace api.Controllers.Others
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!LookupDataExists(id))
+                if (!LookupDataExists(lookupData.ID))
                 {
                     return NotFound();
                 }

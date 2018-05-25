@@ -1,0 +1,315 @@
+﻿
+@{
+    ViewBag.Title = "Item Group";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*http://localhost:65154/ItemGroup/Index*@
+
+<script src="~/scripts/js/jquery-1.10.2.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#alert').hide();
+        $('#editable').DataTable();
+
+        $("#showLoad").show();
+
+        var mode = 'Insert';
+
+        function BindParentGroups() {
+            $.ajax({
+                url: 'http://localhost:41195/api/LookupDatas',
+                type: 'GET',
+                dataType: 'json',
+                success: function (result) {
+                    // when the AJAX succeeds refresh the dropdown list with
+                    // the JSON values returned from the controller action
+                    var selectedDeviceModel = $('#ddl');
+                    selectedDeviceModel.empty();
+                    selectedDeviceModel.append(
+                            $('<option/>', {
+                                value: '0',
+                                text: 'Select'
+                            })
+                        );
+                    $.each(result, function (index, item) {
+
+                        selectedDeviceModel.append(
+                            $('<option/>', {
+                                value: item.ID,
+                                text: item.Code
+                            })
+                        );
+                    });
+                }
+            });
+        }
+
+        function CheckValidation() {
+            if ($('#txtCode').val() == '') {
+                $('#divCode').addClass('has-error');
+            }
+            else if ($('#txtCode').length <= 3) {
+                $('#divCode').addClass('has-error');
+            }
+            else {
+                $('#divCode').addClass('has-success');
+            }
+        }
+
+        $('#btnSave').click(function () {
+            //CheckValidation();
+            var PId;
+            if ($('#ddl').val() == 0) {
+                PId = null;
+            }
+            else {
+                PId = $('#ddl').val();
+            }
+            var obj = new Object();
+            obj.Code = $('#txtCode').val();
+            obj.Name = $('#txtName').val();
+            obj.ParentID = PId;
+            obj.CompanyID = 1;
+
+            if (mode == 'Insert') {
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost:41195/api/LookupDatas',
+                    dataType: 'json',
+                    data: obj,
+                    success: function (response) {
+                        console.log(response);
+                        $('#lblMessage').text(response);
+                        $('#alert').show();
+
+                        BindGroups();
+                    },
+                    error: function (xhr, status, error) {
+                        $('#lblMessage').text(xhr.statustext);
+
+                    }
+                });
+            }
+            else {
+                debugger
+                obj.ID = $('#hdn').val();
+                $.ajax({
+                    type: 'PUT',
+                    url: 'http://localhost:41195/api/LookupDatas/',//?Code=' + obj.Code + '&ID=' + $('#hdn').val() + '&Name=' + obj.Name + '&ParentId=' + obj.ParentGroupID,
+                    data: obj,
+                    success: function (response) {
+                        //alert(response);
+                        $('#lblMessage').text(response);
+                        $('#alert').show();
+
+                        BindGroups();
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error);
+                    }
+                });
+            }
+        });
+        BindGroups();
+        BindParentGroups();
+        $("#showLoad").hide();
+
+        function BindGroups() {
+            $("#showLoad").show();
+            $('#vectorLayerslist').hide();
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:41195/api/LookupDatas',
+                dataType: 'json',
+                success: function (response) {
+                    var Layers = response;//[{ id: 1, Title: 'water' }, { id: 2, Title: 'land' }, { id: 4, Title: 'data' }, { id: 5, Title: 'info' }];
+                    debugger
+                    var vectorLayersList = $('#vectorLayerslist');
+                    vectorLayersList.empty();
+                    // build the table
+                    var content;
+                    $.each(Layers, function () {
+
+                        // we'll store the ID in HTML5 data-attribute for later
+                        content += '<tr class="gradeA" data-id="' + this.ID + '">';
+                        content += '<td>' + this.Code + '</td>';
+                        content += '<td>' + this.Name + '</td>';
+                        if (this.ParentName) {
+                            content += '<td>' + this.ParentName + '</td>';
+                        }
+                        else {
+                            content += '<td>' + '' + '</td>';
+                        }
+                        // give classes to your buttons for later
+                        content += '<td><button type="button" class="edit btn btn-primary" data-toggle="modal" data-target="#myModal">Edit</button></td>';
+                        content += '<td><button type="button" class="delete btn btn-danger">Delete</button></td>';
+                        content += '</tr>';
+                    });
+                    // content += '</tbody></table>';
+
+                    // append the table once
+                    vectorLayersList.append(content);
+                    $("#showLoad").hide();
+                    $('#vectorLayerslist').show();
+
+                    // attach event handlers
+                    vectorLayersList.on('click', '.edit', function () {
+                        var id = $(this).closest('tr').data('id');
+
+                        $('#lblTitle').text('Edit');
+
+                        $.ajax({
+                            type: 'GET',
+                            url: 'http://localhost:41195/api/LookupDatas/' + id,
+                            success: function (response) {
+                                console.log(response)
+                                $('#txtCode').val(response.Code);
+                                $('#txtName').val(response.Name);
+                                if (response.ParentID == null) {
+                                    $('#ddl').val(0);
+                                }
+                                else {
+                                    $('#ddl').val(response.ParentID);
+                                }
+                                $('#hdn').val(response.ID);
+                                mode = 'Edit';
+                            },
+                            error: function (xhr, status, error) {
+                                $('#lblMessage').text(xhr.statustext);
+
+                            }
+                        });
+
+                    });
+
+                    vectorLayersList.on('click', '.delete', function () {
+                        var id = $(this).closest('tr').data('id');
+                        console.log('deleting ' + id);
+
+                        $.ajax({
+                            type: 'DELETE',
+                            url: 'http://localhost:41195/api/LookupDatas/' + id,
+                            dataType: 'json',
+                            success: function (response) {
+                                $('#lblMessage').text(response);
+                                $('#alert').show();
+
+                                BindGroups();
+                            },
+                            error: function (xhr, status, error) {
+                                $('#lblMessage').text(xhr.statustext);
+
+                            }
+                        });
+                    });
+
+                    $('#btnAdd').click(function () {
+                        $('#lblTitle').text('Add');
+                        BindParentGroups()
+                    });
+                },
+                error: function (xhr, status, error) {
+                    $('#lblMessage').text(xhr.statustext);
+
+                }
+            });
+        }
+    });
+</script>
+<input type="hidden" id="hdn" />
+
+
+<div class="container-fluid">
+    <div id="showLoad" style="width:60px;height:25px;background-color:papayawhip;">Loading...</div>
+    <div data-widget-group="group1">
+        <div class="row">
+            <div class="col-md-12">
+                <button id="btnAdd" class="btn btn-success pull-right active" data-toggle="modal" data-target="#myModal">Add</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-info" id="alert">
+                    <label id="lblMessage"></label>
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                </div>
+                <div class="panel panel-default" id="panel-inline">
+                    <div class="panel-heading">
+                        <h2>Item Group Data</h2>
+                        <div class="panel-ctrls"></div>
+                    </div>
+
+                    <div class="panel-body no-padding">
+
+                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="editable">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Name</th>
+                                    <th>Parent Group</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vectorLayerslist"></tbody>
+                        </table><!--end table-->
+                    </div>
+                    <div class="panel-footer"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h2 class="modal-title">
+                    <label id="lblTitle"></label>
+                </h2>
+            </div>
+            <div class="modal-body">
+                <div data-widget-group="group1">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="panel panel-midnightblue" data-widget='{"draggable": "false"}'>
+                                @*has-success  has-warning   has-error*@
+                                <div class="panel-body">
+                                    <form action="#" class="form-horizontal row-border">
+                                        <div class="form-group" id="divCode">
+                                            <label for="" class="col-md-4 control-label">Code</label>
+                                            <div class="col-md-6"><input type="text" id="txtCode" class="form-control"></div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="" class="col-md-4 control-label">Name</label>
+                                            <div class="col-md-6"><input type="text" id="txtName" class="form-control"></div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="" class="col-md-4 control-label">Parent Group</label>
+                                            <div class="col-md-6">
+                                                <select id="ddl" class="form-control"></select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="btnSave" class="btn btn-primary">Save</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

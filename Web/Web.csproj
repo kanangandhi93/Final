@@ -124,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DirCompany\CompanyController.cs" />
     <Compile Include="Controllers\DirItemMaster\ItemGroupController.cs" />
     <Compile Include="Controllers\DirItemMaster\ItemHSNController.cs" />
     <Compile Include="Controllers\DirUnitMaster\UnitController.cs" />
@@ -165,10 +166,12 @@
     <Folder Include="Content\img\" />
     <Folder Include="Content\responsive-email\" />
     <Folder Include="Content\_http_\" />
+    <Folder Include="Controllers\DirBank\" />
     <Folder Include="Models\" />
     <Folder Include="scripts\demo\" />
     <Folder Include="scripts\js\" />
     <Folder Include="scripts\plugins\" />
+    <Folder Include="Views\Company\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

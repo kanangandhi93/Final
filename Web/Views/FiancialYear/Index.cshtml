@@ -3,282 +3,201 @@
     ViewBag.Title = "Item Group";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@*http://localhost:65154/ItemGroup/Index*@
-
+<script src="~/scripts/angular.min.js"></script>
 <script src="~/scripts/js/jquery-1.10.2.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('#alert').hide();
-        $('#editable').DataTable();
-
-        $("#showLoad").show();
-
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function ($scope, $http) {
         var mode = 'Insert';
+        var obj = new Object();
+        $scope.op = false
 
-      
+        LoadData();
+        function LoadData() {
+            $scope.myVar = true
 
-        function CheckValidation() {
-            if ($('#txtCode').val() == '') {
-                $('#divCode').addClass('has-error');
-            }
-            else if ($('#txtCode').length <= 3) {
-                $('#divCode').addClass('has-error');
-            }
-            else {
-                $('#divCode').addClass('has-success');
-            }
+            $http.get("http://localhost:41195/api/FinancialYears/")
+       .then(function (response) {
+           $scope.lst = response.data;
+           $scope.myVar = false
+       });
         }
 
-        $('#btnSave').click(function () {
-            //CheckValidation();
-            var PId;
-            if ($('#ddl').val() == 0) {
-                PId = null;
+        $scope.events = {}
+        $scope.events.btnLoadMore = function ($event) {
+            var Id = angular.element($event.target).attr("data-id");
+            console.log(Id);
+            $http.get("http://localhost:41195/api/FinancialYears/" + Id)
+         .then(function (response) {
+             $scope.content = response.data;
+             $scope.statuscode = response.status;
+             $scope.statustext = response.statusText;
+             mode = 'Edit'
+         });
+        }
+
+        $scope.events.btnDelete = function ($event) {
+            var Id = angular.element($event.target).attr("data-id");
+            console.log(Id);
+            $http.delete("http://localhost:41195/api/FinancialYears/" + Id)
+         .then(function (response) {
+             console.log(response.data)
+             LoadData()
+             $scope.op = true
+         });
+        }
+
+        $scope.events.btnSave = function ($event) {
+            $scope.obj = {
+                Code: $scope.content.Code,
+                Name: $scope.content.Name,
+                ToDate: $scope.content.ToDate,
+                FromDate: $scope.content.FromDate,
+                CompanyID: 1,
+                ID: $scope.content.ID
             }
-            else {
-                PId = $('#ddl').val();
+            console.log($scope.obj)
+            if (mode = 'Edit') {
+                $http.put("http://localhost:41195/api/FinancialYears/",
+                        $scope.obj
+                       )
+                    .then(function (response) {
+                        console.log('Update:' + response.data)
+                    });
+                LoadData()
+                $scope.op = true
             }
-            var obj = new Object();
-            obj.Code = $('#txtCode').val();
-            obj.Name = $('#txtName').val();
-            obj.ToDate = $('#txtToDate').val();
-            obj.FromDate = $('#txtFromDate').val();
-            obj.CompanyID = 1;
 
-            if (mode == 'Insert') {
-
-                $.ajax({
-                    type: 'POST',
-                    url: 'http://localhost:41195/api/FinancialYears',
-                    dataType: 'json',
-                    data: obj,
-                    success: function (response) {
-                        console.log(response);
-                        $('#lblMessage').text(response);
-                        $('#alert').show();
-
-                        BindGroups();
-                    },
-                    error: function (xhr, status, error) {
-                        $('#lblMessage').text(xhr.statustext);
-
-                    }
-                });
+            if (mode = 'Insert') {
+                $http.post("http://localhost:41195/api/FinancialYears/",
+                        $scope.obj
+                       )
+                    .then(function (response) {
+                        console.log('Insert:' + response.data)
+                    });
+                LoadData()
+                $scope.op=true
             }
-            else {
-                debugger
-                obj.ID = $('#hdn').val();
-                $.ajax({
-                    type: 'PUT',
-                    url: 'http://localhost:41195/api/FinancialYears/',//?Code=' + obj.Code + '&ID=' + $('#hdn').val() + '&Name=' + obj.Name + '&ParentId=' + obj.ParentGroupID,
-                    data: obj,
-                    success: function (response) {
-                        //alert(response);
-                        $('#lblMessage').text(response);
-                        $('#alert').show();
-
-                        BindGroups();
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(error);
-                    }
-                });
-            }
-        });
-        BindGroups();
-
-        $("#showLoad").hide();
-
-        function BindGroups() {
-            $("#showLoad").show();
-            $('#vectorLayerslist').hide();
-            $.ajax({
-                type: 'GET',
-                url: 'http://localhost:41195/api/FinancialYears',
-                dataType: 'json',
-                success: function (response) {
-                    var Layers = response;//[{ id: 1, Title: 'water' }, { id: 2, Title: 'land' }, { id: 4, Title: 'data' }, { id: 5, Title: 'info' }];
-                    debugger
-                    var vectorLayersList = $('#vectorLayerslist');
-                    vectorLayersList.empty();
-                    // build the table
-                    var content;
-                    $.each(Layers, function () {
-
-                        // we'll store the ID in HTML5 data-attribute for later
-                        content += '<tr class="gradeA" data-id="' + this.ID + '">';
-                        content += '<td>' + this.Code + '</td>';
-                        content += '<td>' + this.Name + '</td>';
-                        content += '<td>' + this.FromDate + '</td>';
-                        content += '<td>' + this.ToDate + '</td>';
-                         
-                        // give classes to your buttons for later
-                        content += '<td><button type="button" class="edit btn btn-primary" data-toggle="modal" data-target="#myModal">Edit</button></td>';
-                        content += '<td><button type="button" class="delete btn btn-danger">Delete</button></td>';
-                        content += '</tr>';
-                    });
-                    // content += '</tbody></table>';
-
-                    // append the table once
-                    vectorLayersList.append(content);
-                    $("#showLoad").hide();
-                    $('#vectorLayerslist').show();
-
-                    // attach event handlers
-                    vectorLayersList.on('click', '.edit', function () {
-                        var id = $(this).closest('tr').data('id');
-
-                        $('#lblTitle').text('Edit');
-
-                        $.ajax({
-                            type: 'GET',
-                            url: 'http://localhost:41195/api/FinancialYears/' + id,
-                            success: function (response) {
-                                $('#txtCode').val(response.Code);
-                                $('#txtName').val(response.Name);
-                                $('#txtFromDate').val(response.FromDate);
-                                $('#txtToDate').val(response.ToDate);
-                               
-                                $('#hdn').val(response.ID);
-                                mode = 'Edit';
-                            },
-                            error: function (xhr, status, error) {
-                                $('#lblMessage').text(xhr.statustext);
-
-                            }
-                        });
-
-                    });
-
-                    vectorLayersList.on('click', '.delete', function () {
-                        var id = $(this).closest('tr').data('id');
-                        console.log('deleting ' + id);
-
-                        $.ajax({
-                            type: 'DELETE',
-                            url: 'http://localhost:41195/api/FinancialYears/' + id,
-                            dataType: 'json',
-                            success: function (response) {
-                                $('#lblMessage').text(response);
-                                $('#alert').show();
-
-                                BindGroups();
-                            },
-                            error: function (xhr, status, error) {
-                                $('#lblMessage').text(xhr.statustext);
-
-                            }
-                        });
-                    });
-
-                    $('#btnAdd').click(function () {
-                        $('#lblTitle').text('Add');
-                    });
-                },
-                error: function (xhr, status, error) {
-                    $('#lblMessage').text(xhr.statustext);
-
-                }
-            });
         }
     });
 </script>
-<input type="hidden" id="hdn" />
 
 
-<div class="container-fluid">
-    <div id="showLoad" style="width:60px;height:25px;background-color:papayawhip;">Loading...</div>
-    <div data-widget-group="group1">
-        <div class="row">
-            <div class="col-md-12">
-                <button id="btnAdd" class="btn btn-success pull-right active" data-toggle="modal" data-target="#myModal">Add</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-info" id="alert">
-                    <label id="lblMessage"></label>
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                </div>
-                <div class="panel panel-default" id="panel-inline">
-                    <div class="panel-heading">
-                        <h2>Item Group Data</h2>
-                        <div class="panel-ctrls"></div>
-                    </div>
 
-                    <div class="panel-body no-padding">
+<div ng-app="myApp" ng-controller="myCtrl">
+    <input type="hidden" ng-model="$scope.content.ID" id="hdn" />
 
-                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="editable">
-                            <thead>
-                                <tr>
-                                    <th>Code</th>
-                                    <th>Name</th>
-                                    <th>From Date</th>
-                                    <th>To Date</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody id="vectorLayerslist"></tbody>
-                        </table><!--end table-->
-                    </div>
-                    <div class="panel-footer"></div>
+
+    <div class="container-fluid">
+        <div id="showLoad" ng-show="myVar" style="width:60px;height:25px;background-color:papayawhip;">Loading...</div>
+        <div data-widget-group="group1">
+            <div class="row">
+                <div class="col-md-12">
+                    <input class="form-control" ng-model="searchKeyword" type="text">
+                    <button id="btnAdd" class="btn btn-success pull-right active" data-toggle="modal" data-target="#myModal">Add</button>
                 </div>
             </div>
-        </div>
-
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h2 class="modal-title">
-                    <label id="lblTitle"></label>
-                </h2>
-            </div>
-            <div class="modal-body">
-                <div data-widget-group="group1">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="panel panel-midnightblue" data-widget='{"draggable": "false"}'>
-                                @*has-success  has-warning   has-error*@
-                                <div class="panel-body">
-                                    <form action="#" class="form-horizontal row-border">
-                                        <div class="form-group" id="divCode">
-                                            <label for="" class="col-md-4 control-label">Code</label>
-                                            <div class="col-md-6"><input type="text" id="txtCode" class="form-control"></div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="" class="col-md-4 control-label">Name</label>
-                                            <div class="col-md-6"><input type="text" id="txtName" class="form-control"></div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="" class="col-md-4 control-label">From Date</label>
-                                            <div class="col-md-6"><input type="text" id="txtFromDate" class="form-control"></div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="" class="col-md-4 control-label">To Date</label>
-                                            <div class="col-md-6"><input type="text" id="txtToDate" class="form-control"></div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div ng-show="op" class="alert alert-info" id="alert">
+                        <label id="lblMessage"></label>
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                    <div class="panel panel-default" id="panel-inline">
+                        <div class="panel-heading">
+                            <h2>Item Group Data</h2>
+                            <div class="panel-ctrls"></div>
                         </div>
 
+                        <div class="panel-body no-padding">
 
+                            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="editable">
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Name</th>
+                                        <th>From Date</th>
+                                        <th>To Date</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="vectorLayerslist">
+
+
+                                    <tr class="gradeA" ng-repeat="x in lst | injectItemTitles:'itemTitles' | filter: searchKeyword">
+
+                                        <td>{{x.Code}}</td>
+
+                                        <td>{{x.Name}}</td>
+
+                                        <td>{{x.FromDate | date:'dd/MMM/yyyy'}}</td>
+
+                                        <td>{{x.ToDate| date:'dd/MMM/yyyy'}}</td>
+
+                                        <td><button type="button" class="edit btn btn-primary" data-id={{x.ID}} data-toggle="modal" ng-click="events.btnLoadMore($event)" data-target="#myModal">Edit</button></td>
+                                        <td><button type="button" class="edit btn btn-danger" data-id={{x.ID}} data-toggle="modal" ng-click="events.btnDelete($event)">Delete</button></td>
+                                    </tr>
+                                </tbody>
+                            </table><!--end table-->
+                        </div>
+                        <div class="panel-footer"></div>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" id="btnSave" class="btn btn-primary">Save</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h2 class="modal-title">
+                        <label id="lblTitle"></label>
+                    </h2>
+                </div>
+                <div class="modal-body">
+                    <div data-widget-group="group1">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="panel panel-midnightblue" data-widget='{"draggable": "false"}'>
+                                    @*has-success  has-warning   has-error*@
+                                    <div class="panel-body">
+                                        <form action="#" class="form-horizontal row-border">
+                                            <div class="form-group" id="divCode">
+                                                <label for="" class="col-md-4 control-label">Code</label>
+                                                <div class="col-md-6"><input type="text" id="txtCode" ng-model="content.Code" class="form-control"></div>
+                                            </div>
+                                            <div class="form-group ">
+                                                <label for="" class="col-md-4 control-label">Name</label>
+                                                <div class="col-md-6"><input type="text" id="txtName" ng-model="content.Name" class="form-control"></div>
+                                            </div>
+                                            <div class="form-group ">
+                                                <label for="" class="col-md-4 control-label">From Date</label>
+                                                <div class="col-md-6"><input type="text" id="txtFromDate" ng-model="content.FromDate" class="form-control"></div>
+                                            </div>
+                                            <div class="form-group ">
+                                                <label for="" class="col-md-4 control-label">To Date</label>
+                                                <div class="col-md-6"><input type="text" id="txtToDate" ng-model="content.ToDate" class="form-control"></div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="btnSave" class="btn btn-primary" ng-click="events.btnSave($event)">Save</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>

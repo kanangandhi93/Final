@@ -2790,7 +2790,7 @@ body.error .error-wrapper h1 {
 }
 .sidebar nav.widget-body > ul.acc-menu li a {
   display: block;
-  padding: 12px 16px;
+  padding: 12px 2px;
   position: relative;
   font-weight: 400;
 }

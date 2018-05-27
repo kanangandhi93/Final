@@ -17,17 +17,19 @@
                     var content;
                     // we'll store the ID in HTML5 data-attribute for later
                     content = '<li class="nav-separator"><span>Explore</span></li>'
+                    
                     $.each(Layers, function () {
                         var Name = this.Title
                         var href = this.DefaultURL
+                        var icon = this.Icon
                         $.ajax({
                             type: 'GET',
                             url: 'http://localhost:41195/api/Menus/' + this.ID,
                             dataType: 'json',
                             success: function (responseParent) {
                                 if (responseParent.length > 0) {
-                                    content += '  <li>'
-                                    content += '  <a href="javascript:;"><i class="ti ti-layout"></i><span>' + Name + '</span></a>'
+                                    content += '  <li class="hasChild">'
+                                    content += '  <a href="javascript:;"><i class="' + icon + '"></i><span>' + Name + '</span></a>'
                                     content += '<ul class="acc-menu">'
                                     $.each(responseParent, function () {
                                         content += ' <li><a href="' + this.DefaultURL + '">' + this.Title + '</a></li>'
@@ -37,7 +39,7 @@
                                     content += ' </li>    '
                                 }
                                 else {
-                                    content += '<li><a href="' + href + '"><i class="ti ti-home"></i><span>' + Name + '</span></a></li>'
+                                    content += '<li><a href="' + href + '"><i class="' + icon + '"></i><span>' + Name + '</span></a></li>'
                                 }
                             }
                         });

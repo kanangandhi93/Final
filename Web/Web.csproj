@@ -134,6 +134,7 @@
     <Compile Include="Controllers\MenuMasterDir\menuController.cs" />
     <Compile Include="Controllers\Others\FiancialYearController.cs" />
     <Compile Include="Controllers\Others\LookupController.cs" />
+    <Compile Include="Controllers\DirPartyMaster\PartyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -154,6 +155,7 @@
     <Content Include="Views\Unit\Index.cshtml" />
     <Content Include="Views\UnitConversion\Index.cshtml" />
     <Content Include="Views\Lookup\Index.cshtml" />
+    <Content Include="Views\Party\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

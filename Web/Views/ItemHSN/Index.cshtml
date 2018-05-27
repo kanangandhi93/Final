@@ -99,7 +99,6 @@
                 });
             }
             else {
-                debugger
                 obj.ID = $('#hdn').val();
                 $.ajax({
                     type: 'PUT',
@@ -131,7 +130,6 @@
                 dataType: 'json',
                 success: function (response) {
                     var Layers = response;//[{ id: 1, Title: 'water' }, { id: 2, Title: 'land' }, { id: 4, Title: 'data' }, { id: 5, Title: 'info' }];
-                    debugger
                     var vectorLayersList = $('#vectorLayerslist');
                     vectorLayersList.empty();
                     // build the table

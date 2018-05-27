@@ -1,0 +1,176 @@
+﻿
+@{
+    ViewBag.Title = "Item Group";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/scripts/angular.min.js"></script>
+<script src="~/scripts/js/jquery-1.10.2.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="~/scripts/plugins/form-validation/jquery.validate.min.js"></script>  					<!-- Validate Plugin -->
+<script type="text/javascript" src="~/scripts/plugins/form-stepy/jquery.stepy.js"></script>  								<!-- Stepy Plugin -->
+<script type="text/javascript" src="~/scripts/demo/demo-formwizard.js"></script>
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function ($scope, $http) {
+        var mode = 'Insert';
+        var obj = new Object();
+        $scope.op = false
+
+        LoadData();
+        function LoadData() {
+            $scope.myVar = true
+
+            $http.get("http://localhost:41195/api/FinancialYears/")
+       .then(function (response) {
+           $scope.lst = response.data;
+           $scope.myVar = false
+       });
+        }
+
+        $scope.events = {}
+        $scope.events.btnLoadMore = function ($event) {
+            var Id = angular.element($event.target).attr("data-id");
+            console.log(Id);
+            $http.get("http://localhost:41195/api/FinancialYears/" + Id)
+         .then(function (response) {
+             $scope.content = response.data;
+             $scope.statuscode = response.status;
+             $scope.statustext = response.statusText;
+             mode = 'Edit'
+         });
+        }
+
+        $scope.events.btnDelete = function ($event) {
+            var Id = angular.element($event.target).attr("data-id");
+            console.log(Id);
+            $http.delete("http://localhost:41195/api/FinancialYears/" + Id)
+         .then(function (response) {
+             console.log(response.data)
+             LoadData()
+             $scope.op = true
+         });
+        }
+
+        $scope.events.btnSave = function ($event) {
+            $scope.obj = {
+                Code: $scope.content.Code,
+                Name: $scope.content.Name,
+                ToDate: $scope.content.ToDate,
+                FromDate: $scope.content.FromDate,
+                CompanyID: 1,
+                ID: $scope.content.ID
+            }
+            console.log($scope.obj)
+            if (mode = 'Edit') {
+                $http.put("http://localhost:41195/api/FinancialYears/",
+                        $scope.obj
+                       )
+                    .then(function (response) {
+                        console.log('Update:' + response.data)
+                    });
+                LoadData()
+                $scope.op = true
+            }
+
+            if (mode = 'Insert') {
+                $http.post("http://localhost:41195/api/FinancialYears/",
+                        $scope.obj
+                       )
+                    .then(function (response) {
+                        console.log('Insert:' + response.data)
+                    });
+                LoadData()
+                $scope.op=true
+            }
+        }
+    });
+</script>
+
+
+
+<div ng-app="myApp" ng-controller="myCtrl">
+    <input type="hidden" ng-model="$scope.content.ID" id="hdn" />
+
+
+    <div class="container-fluid">
+        <div id="showLoad" ng-show="myVar" style="width:60px;height:25px;background-color:papayawhip;">Loading...</div>
+        <div data-widget-group="group1">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-info" data-widget='{"draggable": "false"}'>
+                        <div class="panel-heading">
+                            <h2>Simple Wizard</h2>
+                            <!-- <div class="options">
+                            <ul class="nav nav-tabs">
+                              <li class="active"><a href="#domwizard" data-toggle="tab"><i class="fa fa-desktop"></i></a></li>
+                              <li><a href="#codewizard" data-toggle="tab"><i class="fa fa-code"></i></a></li>
+                            </ul>
+                        </div> -->
+                        </div>
+                        <div class="panel-body">
+                            <p>You can turn any simple form into a wizard with just one line of code! See it in action...</p>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="domwizard">
+                                    <form action="#" id="basicwizard" class="form-horizontal">
+                                        <fieldset title="Step 1">
+                                            <legend>No Validation</legend>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">User Name</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" placeholder="username" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Email Address</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" placeholder="example@address.com" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Website</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" placeholder="http://address.com" class="form-control">
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset title="Step 2">
+                                            <legend>Just Text</legend>
+                                            <div class="row">
+                                                <label class="col-md-3 control-label">Lorem Ipsum</label>
+                                                <div class="col-md-9">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam, quis autem deleniti animi eum a eaque sint voluptatibus labore possimus accusantium molestias magnam cum officiis qui neque minima assumenda facere aut repellat delectus. Soluta incidunt pariatur natus voluptatum voluptatibus culpa blanditiis. Inventore, repellendus, at veniam magnam quisquam necessitatibus modi est qui deserunt. Dicta, excepturi, iusto, maiores perferendis rem officiis est voluptas possimus laudantium fugit veritatis!</p>
+                                                    <p>By clicking Finish you agree that you accept the Terms &amp; Conditions</p>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <input type="submit" class="finish btn-success btn" value="Submit" />
+                                    </form>
+                                </div>
+
+
+                                <div class="tab-pane" id="codewizard">
+                                    <pre class="prettyprint linenums">
+	&lt;form id=&quot;basicwizard&quot;&gt;
+		&lt;fieldset title=&quot;Step 1&quot;&gt;
+			&lt;legend&gt;No Validation&lt;/legend&gt;
+			...
+		&lt;/fieldset&gt;
+		&lt;fieldset title=&quot;Step 2&quot;&gt;
+			&lt;legend&gt;Just Text&lt;/legend&gt;
+			...
+		&lt;/fieldset&gt;
+	&lt;/form&gt;
+	</pre>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

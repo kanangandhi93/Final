@@ -19,8 +19,8 @@ namespace api.Controllers.apiMenuDir
         // GET: api/Menus
         public IQueryable<Menu> GetMenus()
         {
-            //return db.Menus.Where(i => i.ParentID == 0);
-            return db.Menus;
+            return db.Menus.Where(i => i.ParentID == 0).OrderBy(i=>i.ID);
+            //return db.Menus;
         }
 
         // GET: api/Menus/5

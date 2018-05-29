@@ -117,6 +117,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Wizard\css\bootstrap.min.css" />
+    <Content Include="Content\Wizard\css\demo.css" />
+    <Content Include="Content\Wizard\css\material-bootstrap-wizard.css" />
+    <Content Include="Content\Wizard\img\apple-icon.png" />
+    <Content Include="Content\Wizard\img\default-avatar.png" />
+    <Content Include="Content\Wizard\img\favicon.png" />
+    <Content Include="Content\Wizard\img\new_logo.png" />
+    <Content Include="Content\Wizard\img\thumb_list_boat.png" />
+    <Content Include="Content\Wizard\img\thumb_list_place.png" />
+    <Content Include="Content\Wizard\img\thumb_register.png" />
+    <Content Include="Content\Wizard\img\tim_80x80.png" />
+    <Content Include="Content\Wizard\img\wizard-book.jpg" />
+    <Content Include="Content\Wizard\img\wizard-city.jpg" />
+    <Content Include="Content\Wizard\img\wizard-profile.jpg" />
+    <Content Include="Content\Wizard\js\bootstrap.min.js" />
+    <Content Include="Content\Wizard\js\jquery-2.2.4.min.js" />
+    <Content Include="Content\Wizard\js\jquery.bootstrap.js" />
+    <Content Include="Content\Wizard\js\jquery.validate.min.js" />
+    <Content Include="Content\Wizard\js\material-bootstrap-wizard.js" />
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
@@ -156,6 +175,32 @@
     <Content Include="Views\UnitConversion\Index.cshtml" />
     <Content Include="Views\Lookup\Index.cshtml" />
     <Content Include="Views\Party\Index.cshtml" />
+    <Content Include="Content\Wizard\css\.DS_Store" />
+    <Content Include="Content\Wizard\img\.DS_Store" />
+    <Content Include="Content\Wizard\js\.DS_Store" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\mixins\_buttons.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\mixins\_inputs.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\mixins\_vendor-prefixes.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\_buttons.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\_card.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\_checkboxes.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\_colors.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\_footers.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\_inputs-size.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\_inputs.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\_misc.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\_mixins.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\_navs-pagination.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\_radios.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\_responsive.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\_ripples.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\_shadows.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\_tooltips.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\_typography.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\_variables.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\_variables_bootstrap.scss" />
+    <Content Include="Content\Wizard\scss\material-bootstrap-wizard\_wizard-card.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
